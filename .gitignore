@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+db.sqlite3
+.env
+.vscode/
+.idea/
+.postman/
+*.log
+media/
+coverage/
+htmlcov/
+.DS_Store
