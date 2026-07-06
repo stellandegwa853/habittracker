@@ -103,8 +103,18 @@ export async function fetchHabits() {
   return Array.isArray(data) ? data : data.results || []
 }
 
+export async function fetchHabit(habitId) {
+  const { data } = await api.get(`/habits/${habitId}/`)
+  return data
+}
+
 export async function createHabit(payload) {
   const { data } = await api.post('/habits/', payload)
+  return data
+}
+
+export async function updateHabit(habitId, payload) {
+  const { data } = await api.patch(`/habits/${habitId}/`, payload)
   return data
 }
 
@@ -115,6 +125,43 @@ export async function completeHabit(habitId) {
 
 export async function deleteHabit(habitId) {
   await api.delete(`/habits/${habitId}/`)
+}
+
+export async function fetchCompletions() {
+  const { data } = await api.get('/habits/completions/')
+  return Array.isArray(data) ? data : data.results || []
+}
+
+export async function fetchHabitCompletions(habitId) {
+  const { data } = await api.get(`/habits/${habitId}/completions/`)
+  return Array.isArray(data) ? data : data.results || []
+}
+
+export async function createHabitCompletion(habitId, completedDate) {
+  const { data } = await api.post(`/habits/${habitId}/completions/`, {
+    completed_date: completedDate,
+  })
+  return data
+}
+
+export async function updateProfile(payload) {
+  const { data } = await api.patch('/users/profile/', payload)
+  return data
+}
+
+export async function fetchPreferences() {
+  const { data } = await api.get('/users/preferences/')
+  return data
+}
+
+export async function updatePreferences(payload) {
+  const { data } = await api.patch('/users/preferences/', payload)
+  return data
+}
+
+export async function changePassword(payload) {
+  const { data } = await api.post('/users/change-password/', payload)
+  return data
 }
 
 export { API_BASE_URL }

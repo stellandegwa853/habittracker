@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import landingBackground from '../assets/landing_background.jpg'
+import { loginUser, registerUser } from '../services/api'
 
 function Register() {
   const navigate = useNavigate()
@@ -13,13 +14,33 @@ function Register() {
     confirm_password: '',
   })
   const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   function handleChange(event) {
     const { name, value } = event.target
     setForm((currentForm) => ({ ...currentForm, [name]: value }))
   }
 
-  function handleSubmit(event) {
+  function getErrorMessage(requestError) {
+    const responseData = requestError.response?.data
+
+    if (!responseData) {
+      return 'Could not create your account. Please try again.'
+    }
+
+    if (typeof responseData === 'string') {
+      return responseData
+    }
+
+    return (
+      responseData.detail ||
+      responseData.non_field_errors?.[0] ||
+      Object.values(responseData).flat()[0] ||
+      'Could not create your account. Please try again.'
+    )
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault()
     setError('')
 
@@ -28,7 +49,26 @@ function Register() {
       return
     }
 
-    navigate('/dashboard')
+    setIsSubmitting(true)
+
+    try {
+      await registerUser({
+        first_name: form.first_name,
+        last_name: form.last_name,
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      })
+      await loginUser({
+        email: form.email,
+        password: form.password,
+      })
+      navigate('/dashboard', { replace: true })
+    } catch (requestError) {
+      setError(getErrorMessage(requestError))
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -120,9 +160,10 @@ function Register() {
 
             <button
               type="submit"
-              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-lg bg-amber-800/90 px-6 py-2.5 text-base font-medium text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45"
+              disabled={isSubmitting}
+              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-lg bg-amber-800/90 px-6 py-2.5 text-base font-medium text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45 disabled:cursor-not-allowed disabled:bg-stone-500/80"
             >
-              Register
+              {isSubmitting ? 'Creating account...' : 'Register'}
             </button>
           </form>
 

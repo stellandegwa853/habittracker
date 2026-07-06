@@ -6,7 +6,7 @@ def calculate_streak(completions):
     completions: QuerySet of HabitCompletion ordered by completed_date
     """
 
-    dates = sorted([c.completed_date for c in completions])
+    dates = sorted({c.completed_date for c in completions})
 
     if not dates:
         return 0, 0

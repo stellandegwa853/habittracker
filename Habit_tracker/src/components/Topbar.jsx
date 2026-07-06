@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FiSearch } from 'react-icons/fi'
-import { userProfile } from '../utils/mockData'
+import { useAppData } from '../context/useAppData'
 
 const pageTitles = {
   '/dashboard': 'Dashboard',
@@ -16,6 +16,7 @@ const pageTitles = {
 
 function Topbar() {
   const location = useLocation()
+  const { profile } = useAppData()
   const title = useMemo(() => {
     if (pageTitles[location.pathname]) {
       return pageTitles[location.pathname]
@@ -32,6 +33,12 @@ function Topbar() {
     return 'VibeCheck'
   }, [location.pathname])
 
+  const firstName = profile?.first_name || 'there'
+  const initials =
+    `${profile?.first_name?.[0] || ''}${profile?.last_name?.[0] || ''}` ||
+    profile?.username?.slice(0, 2) ||
+    'VC'
+
   const dateLabel = new Intl.DateTimeFormat('en', {
     weekday: 'short',
     month: 'short',
@@ -46,7 +53,7 @@ function Topbar() {
             {title}
           </h1>
           <p className="mt-1 text-sm text-stone-500">
-            Hey, {userProfile.firstName}. You&apos;re building quietly.
+            Hey, {firstName}. You&apos;re building quietly.
           </p>
         </div>
 
@@ -63,7 +70,7 @@ function Topbar() {
           <div className="flex items-center justify-between gap-3 rounded-full border border-white/80 bg-white/60 px-3 py-2 shadow-sm sm:justify-start">
             <span className="text-sm font-medium text-stone-600">{dateLabel}</span>
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8a5637] text-sm font-semibold text-white">
-              {userProfile.initials}
+              {initials.toUpperCase()}
             </span>
           </div>
         </div>

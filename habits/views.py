@@ -1,12 +1,12 @@
-from rest_framework import generics, permissions, status
+from datetime import timedelta
+
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import PermissionDenied
 from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
-from django.db.models import Count
 
 from .models import Habit, HabitCompletion
 from .serializers import HabitSerializer, HabitCompletionSerializer
@@ -18,7 +18,13 @@ class HabitListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ["title", "category"]
-    ordering_fields = ["created_at", "title", "target_days"]
+    ordering_fields = [
+        "created_at",
+        "title",
+        "target_days",
+        "category",
+        "frequency",
+    ]
     ordering = ["-created_at"]  # Default ordering
 
     def get_queryset(self):
@@ -60,7 +66,11 @@ class CompleteHabitView(APIView):
             )
 
         return Response(
-            {"message": "Habit marked as completed!"},
+            {
+                "message": "Habit marked as completed!",
+                "completion": HabitCompletionSerializer(completion).data,
+                "habit": HabitSerializer(habit).data,
+            },
             status=status.HTTP_201_CREATED
         )
 
@@ -102,6 +112,7 @@ class DashboardView(APIView):
 
     def get(self, request):
         today = timezone.now().date()
+        start_date = today - timedelta(days=6)
 
         habits = Habit.objects.filter(user=request.user)
 
@@ -124,12 +135,40 @@ class DashboardView(APIView):
             habit__user=request.user
         ).order_by("completed_date")
 
+        total_completed = completions.count()
+
         current_streak, longest_streak = calculate_streak(completions)
+
+        habit_payload = HabitSerializer(habits, many=True).data
+        most_consistent_habit = None
+
+        if habit_payload:
+            most_consistent_habit = max(
+                habit_payload,
+                key=lambda habit: habit.get("completion_rate", 0)
+            )
+
+        weekly_progress = []
+
+        for offset in range(7):
+            day = start_date + timedelta(days=offset)
+            completed = completions.filter(completed_date=day).count()
+
+            weekly_progress.append({
+                "date": day.isoformat(),
+                "day": day.strftime("%a"),
+                "completed": completed,
+                "total": total_habits,
+                "active": completed > 0,
+            })
 
         return Response({
             "total_habits": total_habits,
             "completed_today": completed_today,
+            "total_completed": total_completed,
             "completion_rate": completion_rate,
             "current_streak": current_streak,
-            "longest_streak": longest_streak
+            "longest_streak": longest_streak,
+            "weekly_progress": weekly_progress,
+            "most_consistent_habit": most_consistent_habit,
         })

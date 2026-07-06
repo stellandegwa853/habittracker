@@ -10,7 +10,16 @@ function CalendarGrid({ days, onSelectDay, selectedDay }) {
       </div>
 
       <div className="mt-3 grid grid-cols-7 gap-2">
-        {(days || []).map((day) => {
+        {(days || []).map((day, index) => {
+          if (day.empty) {
+            return (
+              <span
+                key={`empty-${index}`}
+                className="aspect-square rounded-2xl border border-transparent"
+              />
+            )
+          }
+
           const isSelected = selectedDay?.day === day.day
 
           return (

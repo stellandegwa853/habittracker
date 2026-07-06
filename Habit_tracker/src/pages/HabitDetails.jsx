@@ -2,12 +2,18 @@ import { Link, useParams } from 'react-router-dom'
 import CalendarGrid from '../components/CalendarGrid'
 import ProgressRing from '../components/ProgressRing'
 import StatCard from '../components/StatCard'
-import { calendarDays, habits, weeklyProgress } from '../utils/mockData'
+import { useAppData } from '../context/useAppData'
+import { buildCalendarDays } from '../utils/habitTransforms'
 
 function HabitDetails() {
   const { id } = useParams()
-  const habit = habits.find((item) => String(item.id) === id) || habits[0]
-  const miniDays = calendarDays.slice(0, 21)
+  const { habits, isLoading, weeklyProgress } = useAppData()
+  const habit = habits.find((item) => String(item.id) === id)
+  const miniDays = buildCalendarDays(habit ? [habit] : []).slice(0, 21)
+
+  if (isLoading) {
+    return <StateCard message="Loading habit details..." />
+  }
 
   if (!habit) {
     return (
@@ -36,7 +42,7 @@ function HabitDetails() {
             {habit.title}
           </h2>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-stone-600">
-            {habit.description}
+            {habit.description || 'No description yet.'}
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
@@ -71,24 +77,24 @@ function HabitDetails() {
             Weekly activity
           </h3>
           <div className="mt-5 space-y-3">
-            {weeklyProgress.map((day) => (
-              <div key={day.day}>
-                <div className="flex justify-between text-sm text-stone-500">
-                  <span>{day.day}</span>
-                  <span>
-                    {day.completed}/{day.total}
-                  </span>
+            {weeklyProgress.map((day) => {
+              const completed = habit.completionDates.includes(day.date) ? 1 : 0
+
+              return (
+                <div key={day.date}>
+                  <div className="flex justify-between text-sm text-stone-500">
+                    <span>{day.day}</span>
+                    <span>{completed}/1</span>
+                  </div>
+                  <div className="mt-2 h-3 rounded-full bg-stone-100">
+                    <div
+                      className="h-full rounded-full bg-[#8a5637]"
+                      style={{ width: completed ? '100%' : '0%' }}
+                    />
+                  </div>
                 </div>
-                <div className="mt-2 h-3 rounded-full bg-stone-100">
-                  <div
-                    className="h-full rounded-full bg-[#8a5637]"
-                    style={{
-                      width: `${Math.round((day.completed / day.total) * 100)}%`,
-                    }}
-                  />
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
@@ -100,11 +106,19 @@ function HabitDetails() {
           Notes and reminder
         </h3>
         <p className="mt-3 text-sm leading-6 text-stone-600">
-          Reminder set for {habit.reminderTime}. Keep this habit light enough to
-          repeat on an ordinary day.
+          Reminder set for {habit.reminderTime || 'no time yet'}. Keep this
+          habit light enough to repeat on an ordinary day.
         </p>
       </section>
     </div>
+  )
+}
+
+function StateCard({ message }) {
+  return (
+    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5">
+      {message}
+    </section>
   )
 }
 

@@ -1,16 +1,21 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import HabitForm from '../components/HabitForm'
-import { habits } from '../utils/mockData'
+import { useAppData } from '../context/useAppData'
+import { toHabitFormValues } from '../utils/habitTransforms'
 
 function EditHabit() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const habit = habits.find((item) => String(item.id) === id) || habits[0]
+  const { habits, isLoading, updateHabitRecord } = useAppData()
+  const habit = habits.find((item) => String(item.id) === id)
 
-  function handleSubmit(form) {
-    console.log('Mock habit updated:', form)
-    window.alert('Habit updated locally for now.')
+  async function handleSubmit(form) {
+    await updateHabitRecord(id, form)
     navigate(`/habits/${habit.id}`)
+  }
+
+  if (isLoading) {
+    return <EmptyState title="Loading habit" message="Finding that rhythm..." />
   }
 
   if (!habit) {
@@ -35,7 +40,7 @@ function EditHabit() {
       </section>
 
       <HabitForm
-        initialValues={habit}
+        initialValues={toHabitFormValues(habit)}
         onSubmit={handleSubmit}
         submitLabel="Update Habit"
       />

@@ -19,6 +19,7 @@ urlpatterns = [
     path("<int:pk>/complete/", CompleteHabitView.as_view(), name="habit-complete"),
     
     # Habit completion endpoints
+    path("completions/", HabitCompletionListCreateView.as_view(), name="all-completion-list"),
     path("<int:habit_pk>/completions/", HabitCompletionListCreateView.as_view(), name="completion-list"),
     path("completions/<int:pk>/", HabitCompletionDetailView.as_view(), name="completion-detail"),
 ]

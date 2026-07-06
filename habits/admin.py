@@ -8,6 +8,8 @@ class HabitAdmin(admin.ModelAdmin):
         "title",
         "user",
         "category",
+        "frequency",
+        "time_of_day",
         "target_days",
         "created_at",
     )
@@ -17,6 +19,8 @@ class HabitAdmin(admin.ModelAdmin):
     )
     list_filter = (
         "category",
+        "frequency",
+        "time_of_day",
         "created_at",
     )
     readonly_fields = ("created_at", "updated_at")

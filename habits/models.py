@@ -18,6 +18,42 @@ class Habit(models.Model):
         blank=True
     )
 
+    frequency = models.CharField(
+        max_length=50,
+        default='Daily'
+    )
+
+    time_of_day = models.CharField(
+        max_length=50,
+        default='Morning'
+    )
+
+    goal = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    reminder_time = models.TimeField(
+        null=True,
+        blank=True
+    )
+
+    start_date = models.DateField(
+        null=True,
+        blank=True
+    )
+
+    mood_tag = models.CharField(
+        max_length=50,
+        default='Calm'
+    )
+
+    color = models.CharField(
+        max_length=50,
+        blank=True,
+        default='coffee'
+    )
+
     target_days = models.PositiveIntegerField(default=30)
 
     created_at = models.DateTimeField(auto_now_add=True)

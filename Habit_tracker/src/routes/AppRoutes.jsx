@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import AppLayout from '../components/AppLayout'
 import Achievements from '../pages/Achievements'
 import Calendar from '../pages/Calendar'
@@ -14,6 +14,7 @@ import Profile from '../pages/Profile'
 import Register from '../pages/Register'
 import Settings from '../pages/Settings'
 import Statistics from '../pages/Statistics'
+import { getStoredTokens } from '../services/api'
 
 function AppRoutes() {
   return (
@@ -22,7 +23,13 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route element={<AppLayout />}>
+      <Route
+        element={
+          <ProtectedRoute>
+            <AppLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/habits" element={<Habits />} />
         <Route path="/habits/" element={<Navigate to="/habits" replace />} />
@@ -39,6 +46,16 @@ function AppRoutes() {
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
+}
+
+function ProtectedRoute({ children }) {
+  const location = useLocation()
+
+  if (!getStoredTokens()?.access) {
+    return <Navigate to="/login" replace state={{ from: location }} />
+  }
+
+  return children
 }
 
 export default AppRoutes

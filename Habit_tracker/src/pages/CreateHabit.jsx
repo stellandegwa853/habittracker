@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import HabitForm from '../components/HabitForm'
+import { useAppData } from '../context/useAppData'
 
 function CreateHabit() {
   const navigate = useNavigate()
+  const { createHabitRecord } = useAppData()
 
-  function handleSubmit(form) {
-    console.log('Mock habit created:', form)
-    window.alert('Habit saved locally for now. Backend connection comes later.')
+  async function handleSubmit(form) {
+    await createHabitRecord(form)
     navigate('/habits')
   }
 
@@ -18,8 +19,8 @@ function CreateHabit() {
           Start small, stay kind
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
-          Give the habit a clear shape. The goal is not to impress anyone, just
-          to make showing up easier.
+          Give the habit a clear shape. This one will be saved to your
+          VibeCheck backend.
         </p>
       </section>
 

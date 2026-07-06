@@ -2,12 +2,20 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiPlus, FiSearch } from 'react-icons/fi'
 import HabitCard from '../components/HabitCard'
-import { categories, habits as habitSeed } from '../utils/mockData'
+import { useAppData } from '../context/useAppData'
+import { categories } from '../utils/mockData'
 
 function Habits() {
-  const [habits, setHabits] = useState(habitSeed)
+  const {
+    completeHabitRecord,
+    deleteHabitRecord,
+    error,
+    habits,
+    isLoading,
+  } = useAppData()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
+  const [notice, setNotice] = useState('')
 
   const filteredHabits = useMemo(() => {
     return habits.filter((habit) => {
@@ -20,18 +28,18 @@ function Habits() {
     })
   }, [category, habits, query])
 
-  function handleDelete(habitId) {
-    setHabits((currentHabits) =>
-      currentHabits.filter((habit) => habit.id !== habitId),
-    )
+  async function handleDelete(habitId) {
+    await deleteHabitRecord(habitId)
+    setNotice('Habit deleted.')
   }
 
-  function handleMarkDone(habitId) {
-    setHabits((currentHabits) =>
-      currentHabits.map((habit) =>
-        habit.id === habitId ? { ...habit, completedToday: true } : habit,
-      ),
-    )
+  async function handleMarkDone(habitId) {
+    try {
+      await completeHabitRecord(habitId)
+      setNotice('Habit marked done.')
+    } catch {
+      setNotice('That habit is already complete today.')
+    }
   }
 
   return (
@@ -43,8 +51,7 @@ function Habits() {
             Keep the chain alive
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
-            A soft place for the routines you&apos;re practicing, rebuilding,
-            and slowly making yours.
+            Your real habits from Django, filtered gently on the frontend.
           </p>
         </div>
         <Link
@@ -88,17 +95,37 @@ function Habits() {
         </div>
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-2">
-        {filteredHabits.map((habit) => (
-          <HabitCard
-            key={habit.id}
-            habit={habit}
-            onDelete={handleDelete}
-            onMarkDone={handleMarkDone}
-          />
-        ))}
-      </section>
+      {error || notice ? (
+        <p className="rounded-2xl border border-white/75 bg-white/65 px-4 py-3 text-sm text-stone-600 shadow-sm">
+          {error || notice}
+        </p>
+      ) : null}
+
+      {isLoading ? (
+        <StateCard message="Loading habits..." />
+      ) : filteredHabits.length ? (
+        <section className="grid gap-4 xl:grid-cols-2">
+          {filteredHabits.map((habit) => (
+            <HabitCard
+              key={habit.id}
+              habit={habit}
+              onDelete={handleDelete}
+              onMarkDone={handleMarkDone}
+            />
+          ))}
+        </section>
+      ) : (
+        <StateCard message="No habits found. Add one to start the chain." />
+      )}
     </div>
+  )
+}
+
+function StateCard({ message }) {
+  return (
+    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5 backdrop-blur">
+      {message}
+    </section>
   )
 }
 

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
   FiAward,
   FiBarChart2,
@@ -9,6 +9,7 @@ import {
   FiSettings,
   FiUser,
 } from 'react-icons/fi'
+import { clearTokens } from '../services/api'
 
 const navItems = [
   { label: 'Dashboard', to: '/dashboard', icon: FiHome },
@@ -27,6 +28,13 @@ const mobileItems = navItems.filter((item) =>
 )
 
 function Sidebar() {
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    clearTokens()
+    navigate('/login', { replace: true })
+  }
+
   return (
     <>
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-white/70 bg-white/45 px-5 py-6 shadow-xl shadow-stone-900/5 backdrop-blur-xl lg:flex lg:flex-col">
@@ -53,13 +61,14 @@ function Sidebar() {
           <p className="mt-1 text-xs leading-5 text-stone-500">
             Show up once today. That still counts.
           </p>
-          <NavLink
-            to="/login"
+          <button
+            type="button"
+            onClick={handleLogout}
             className="mt-4 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-stone-600 transition hover:bg-white/70 hover:text-stone-950"
           >
             <FiLogOut />
             Logout
-          </NavLink>
+          </button>
         </div>
       </aside>
 

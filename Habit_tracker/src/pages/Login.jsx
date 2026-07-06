@@ -1,14 +1,19 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import landingBackground from '../assets/landing_background.jpg'
+import { loginUser } from '../services/api'
 
 function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const redirectTo = location.state?.from?.pathname || '/dashboard'
   const [form, setForm] = useState({
     email: '',
     password: '',
     rememberMe: false,
   })
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   function handleChange(event) {
     const { checked, name, type, value } = event.target
@@ -18,9 +23,29 @@ function Login() {
     }))
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    navigate('/dashboard')
+    setError('')
+    setIsSubmitting(true)
+
+    try {
+      await loginUser({
+        email: form.email,
+        password: form.password,
+      })
+      navigate(redirectTo, { replace: true })
+    } catch (requestError) {
+      const responseData = requestError.response?.data
+
+      setError(
+        responseData?.detail ||
+          responseData?.non_field_errors?.[0] ||
+          Object.values(responseData || {}).flat()[0] ||
+          'Could not log in. Please check your email and password.',
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -98,11 +123,18 @@ function Login() {
               </a>
             </div>
 
+            {error ? (
+              <p className="rounded-lg border border-red-100/30 bg-red-950/45 px-4 py-2 text-sm text-red-50">
+                {error}
+              </p>
+            ) : null}
+
             <button
               type="submit"
-              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-lg bg-amber-800/90 px-6 py-2.5 text-base font-medium text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45"
+              disabled={isSubmitting}
+              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-lg bg-amber-800/90 px-6 py-2.5 text-base font-medium text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45 disabled:cursor-not-allowed disabled:bg-stone-500/80"
             >
-              Login
+              {isSubmitting ? 'Logging in...' : 'Login'}
             </button>
           </form>
 
