@@ -13,7 +13,7 @@ const defaultValues = {
   reminderTime: '',
   startDate: '',
   moodTag: 'Calm',
-  targetDays: 30,
+  targetDays: '',
 }
 
 const frequencyOptions = ['Daily', 'Weekdays', 'Twice weekly', 'Weekly']
@@ -129,9 +129,9 @@ function HabitForm({
 
               <Field label="Target days">
                 <input
-                  required
                   min="1"
                   name="targetDays"
+                  placeholder="Optional"
                   type="number"
                   value={form.targetDays}
                   onChange={handleChange}

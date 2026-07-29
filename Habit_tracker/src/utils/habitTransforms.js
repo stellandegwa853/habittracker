@@ -32,7 +32,7 @@ export function toHabitViews(habits = []) {
 }
 
 export function toHabitPayload(form) {
-  return {
+  const payload = {
     title: form.title,
     description: form.description || '',
     category: form.category || 'Personal',
@@ -43,8 +43,13 @@ export function toHabitPayload(form) {
     start_date: form.startDate || null,
     mood_tag: form.moodTag || 'Calm',
     color: form.color || 'coffee',
-    target_days: Number(form.targetDays || 30),
   }
+
+  if (form.targetDays !== '' && form.targetDays !== null && form.targetDays !== undefined) {
+    payload.target_days = Number(form.targetDays)
+  }
+
+  return payload
 }
 
 export function toHabitFormValues(habit) {
