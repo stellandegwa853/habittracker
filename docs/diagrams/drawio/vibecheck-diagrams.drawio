@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<mxfile host="app.diagrams.net" modified="2026-07-29T15:48:53.891092+00:00" agent="Codex" version="24.7.17" type="device">
+<mxfile host="app.diagrams.net" modified="2026-07-29T15:52:06.717057+00:00" agent="Codex" version="24.7.17" type="device">
   <diagram id="page-use-case" name="Use Case Diagram">
     <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1250" pageHeight="1600" background="#151515" math="0" shadow="0">
       <root>
@@ -270,7 +270,7 @@
         <mxCell id="ac-sub" value="Main VibeCheck user journey" style="text;html=1;strokeColor=none;fillColor=none;fontSize=18;fontColor=#cfcfcf;align=left;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="50" y="70" width="500" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="ac-open" value="Open VibeCheck" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#26394a;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=20;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="ac-open" value="Open VibeCheck" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=20;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="345" y="130" width="410" height="70" as="geometry" />
         </mxCell>
         <mxCell id="ac-login" value="Register or log in" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=20;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
@@ -291,10 +291,10 @@
         <mxCell id="ac-time" value="&lt;b&gt;Time-based habit&lt;/b&gt;&lt;br&gt;Start, pause, finish timer" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="635" y="830" width="340" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="ac-save" value="&lt;b&gt;Backend saves completion&lt;/b&gt;&lt;br&gt;Progress and streaks update" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#2f4a39;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
+        <mxCell id="ac-save" value="&lt;b&gt;Backend saves completion&lt;/b&gt;&lt;br&gt;Progress and streaks update" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#3a3a3a;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="345" y="1010" width="410" height="85" as="geometry" />
         </mxCell>
-        <mxCell id="ac-view" value="View calendar and statistics" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#51451d;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
+        <mxCell id="ac-view" value="View calendar and statistics" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="345" y="1145" width="410" height="65" as="geometry" />
         </mxCell>
         <mxCell id="ac-l1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-open" target="ac-login">
