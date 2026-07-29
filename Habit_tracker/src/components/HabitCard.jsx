@@ -7,6 +7,9 @@ function HabitCard({ habit, onDelete, onMarkDone, showActions = true }) {
     return null
   }
 
+  const currentStreak = formatDays(habit.currentStreak)
+  const bestStreak = formatDays(habit.bestStreak)
+
   return (
     <article className="group overflow-hidden rounded-[1.4rem] border border-white/75 bg-[#fffaf4]/78 shadow-sm shadow-stone-900/5 backdrop-blur transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-stone-900/8">
       <div className="h-1 bg-[#8a5637]/70" />
@@ -43,9 +46,9 @@ function HabitCard({ habit, onDelete, onMarkDone, showActions = true }) {
 
           <div className="grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
             <Info label="Frequency" value={habit.frequency} />
-            <Info label="Current streak" value={`${habit.currentStreak} days`} />
-            <Info label="Best streak" value={`${habit.bestStreak} days`} />
-            <Info label="Mood tag" value={habit.moodTag} />
+            <Info label="Streak" value={currentStreak} />
+            <Info label="Best" value={bestStreak} />
+            <Info label="Mood" value={habit.moodTag} />
           </div>
 
           <div className="rounded-[1.15rem] border border-stone-200/60 bg-white/58 p-4">
@@ -98,8 +101,8 @@ function HabitCard({ habit, onDelete, onMarkDone, showActions = true }) {
 
 function Info({ label, value }) {
   return (
-    <div className="min-h-20 rounded-[1rem] border border-stone-200/60 bg-white/58 px-3 py-3">
-      <p className="whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.08em] text-stone-400">
+    <div className="flex min-h-20 flex-col justify-center rounded-[1rem] border border-stone-200/60 bg-white/58 px-4 py-3">
+      <p className="whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.06em] text-stone-400">
         {label}
       </p>
       <p className="mt-2 text-base font-semibold leading-5 text-stone-800">
@@ -107,6 +110,11 @@ function Info({ label, value }) {
       </p>
     </div>
   )
+}
+
+function formatDays(value = 0) {
+  const days = Number(value) || 0
+  return `${days} ${days === 1 ? 'day' : 'days'}`
 }
 
 export default HabitCard
