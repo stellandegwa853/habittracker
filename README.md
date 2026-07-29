@@ -80,23 +80,23 @@ The system is designed for students or everyday users who want a light habit tra
 
 ```text
 habittracker/
-├── Habit_tracker/              # React frontend and Django project settings
-│   ├── src/
-│   │   ├── components/
-│   │   ├── context/
-│   │   ├── pages/
-│   │   ├── routes/
-│   │   ├── services/
-│   │   └── utils/
-│   ├── package.json
-│   └── settings.py
-├── habits/                     # Django habit app
-├── users/                      # Django user/profile app
-├── docs/                       # Rubric documentation and diagrams
-├── presentation_screenshots/   # Existing presentation screenshots
-├── manage.py
-├── package.json                # Root helper scripts
-└── requirements.txt
+|-- Habit_tracker/              # React frontend and Django project settings
+|   |-- src/
+|   |   |-- components/
+|   |   |-- context/
+|   |   |-- pages/
+|   |   |-- routes/
+|   |   |-- services/
+|   |   `-- utils/
+|   |-- package.json
+|   `-- settings.py
+|-- habits/                     # Django habit app
+|-- users/                      # Django user/profile app
+|-- docs/                       # Rubric documentation and diagrams
+|-- presentation_screenshots/   # Existing presentation screenshots
+|-- manage.py
+|-- package.json                # Root helper scripts
+`-- requirements.txt
 ```
 
 ## Setup Instructions
