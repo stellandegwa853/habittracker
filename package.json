@@ -7,9 +7,9 @@
     "build": "npm --prefix frontend run build",
     "lint": "npm --prefix frontend run lint",
     "install:frontend": "npm --prefix frontend install",
-    "backend": "cd backend && ../.venv/bin/python manage.py runserver 8000",
-    "backend:check": "cd backend && ../.venv/bin/python manage.py check",
-    "backend:test": "cd backend && ../.venv/bin/python manage.py test",
-    "backend:migrate": "cd backend && ../.venv/bin/python manage.py migrate"
+    "backend": "bash scripts/django.sh runserver 8000",
+    "backend:check": "bash scripts/django.sh check",
+    "backend:test": "bash scripts/django.sh test",
+    "backend:migrate": "bash scripts/django.sh migrate"
   }
 }

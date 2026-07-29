@@ -149,6 +149,8 @@ npm run backend:migrate
 npm run backend
 ```
 
+The backend npm scripts automatically use `.venv/bin/python` when the virtual environment exists. If Django is missing, the script prints the setup commands to run.
+
 ### 3. Frontend Setup
 
 Install frontend dependencies:
