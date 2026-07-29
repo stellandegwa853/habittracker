@@ -24,6 +24,8 @@ These branches are not fake commits. They point to actual project work.
 | `codex/milestone/presentation-notes` | `2755050` | Presentation explanation notes added. |
 | `codex/milestone/presentation-evidence` | `dfa92e5` | Project screenshots added for presentation evidence. |
 | `codex/milestone/presentation-docx` | `232be6d` | Word document version of the presentation notes created. |
+| `structured-goal-timer` | `78a8b02` | Structured habit goal types and frontend timer controls added. |
+| `rubric-submission-docs` | current branch | Final rubric documentation, diagrams, demo script, screenshot checklist, project board, and CI workflow example. |
 
 ## Current Presentation Story
 
@@ -37,4 +39,17 @@ The project can be explained as a steady build:
 6. Connected the frontend to backend code.
 7. Fixed routing issues found during testing.
 8. Added presentation notes, screenshots, and a Word document for submission support.
+9. Added structured habit goal types and timer support for time-based habits.
+10. Prepared final rubric documentation, diagrams, demo script, screenshot checklist, and project management board.
 
+## Rubric Submission Files
+
+- `docs/SWE3040XA_FINAL_PROJECT_DOCUMENTATION.md`
+- `docs/DEMO_SCRIPT.md`
+- `docs/SCREENSHOT_CHECKLIST.md`
+- `docs/PROJECT_MANAGEMENT_BOARD.md`
+- `docs/diagrams/use-case-diagram.md`
+- `docs/diagrams/class-diagram.md`
+- `docs/diagrams/activity-diagram.md`
+- `docs/diagrams/sequence-diagram.md`
+- `docs/CI_WORKFLOW_EXAMPLE.yml`

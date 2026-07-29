@@ -2,6 +2,24 @@
 
 These notes use simple wording and real examples from our Habit Tracker project.
 
+## Rubric Documentation Update
+
+The final rubric-aligned submission document is now in:
+
+- `docs/SWE3040XA_FINAL_PROJECT_DOCUMENTATION.md`
+
+Supporting files:
+
+- `docs/diagrams/use-case-diagram.md`
+- `docs/diagrams/class-diagram.md`
+- `docs/diagrams/activity-diagram.md`
+- `docs/diagrams/sequence-diagram.md`
+- `docs/DEMO_SCRIPT.md`
+- `docs/SCREENSHOT_CHECKLIST.md`
+- `docs/PROJECT_MANAGEMENT_BOARD.md`
+
+Use these files for the final presentation because they directly cover the SWE3040XA rubric areas: project brief, requirements, diagrams, demo, UI, design principles, SOLID, testing, version control, teamwork, project management, references, and reflections.
+
 ## Screenshot Key
 
 - S1 Dashboard: `presentation_screenshots/01_dashboard.png`
@@ -57,7 +75,7 @@ Screenshot: S5.
 
 Simple definition: CI/CD is a system that checks, builds, and sometimes deploys the project automatically when code is pushed.
 
-How we used it: We do not have a full CI/CD workflow file in the repo yet. What we do have is local build and lint commands, which are the kind of checks that would go inside CI later.
+How we used it: The repo includes a sample GitHub Actions workflow in `docs/CI_WORKFLOW_EXAMPLE.yml`. It is designed to run frontend lint/build and backend Django check/tests if the group later copies it into `.github/workflows/ci.yml`. We should not claim full CI/CD until a real GitHub Actions run is shown.
 
 Screenshot: S8.
 
@@ -81,7 +99,7 @@ Screenshot: S8.
 
 Simple definition: Automated tests are checks that run by themselves to see if the code still works.
 
-How we used it: The Django apps already have test files, but real tests still need to be written. This is an area we can improve next.
+How we used it: The Django test command currently passes 2 backend tests for structured habit goal validation. The project still needs more tests for authentication, habit CRUD, integration flows, and frontend behavior.
 
 Screenshot: S8.
 
@@ -201,7 +219,7 @@ Screenshot: S5.
 
 Simple definition: Testing and code quality are about making sure the app works and the code is clean enough to maintain.
 
-How we used it: We ran linting and build checks. The app also has Django test files started, but more real tests are still needed.
+How we used it: We ran linting, build checks, Django system checks, and Django tests. Current checks pass locally, but more frontend, integration, system, and acceptance tests are still needed.
 
 Screenshot: S8.
 
@@ -209,7 +227,7 @@ Screenshot: S8.
 
 Simple definition: Unit tests check small pieces. Integration tests check pieces working together. System tests check the whole app. Acceptance tests check if the app does what the user needs.
 
-How we used it: We have not fully written these tests yet. Examples for VibeCheck would be:
+How we used it: We have 2 backend tests at the moment. They check that time-based habits require a duration and that simple habits clear timer fields. We have not fully written integration, frontend, system, or acceptance tests yet. Examples for VibeCheck would be:
 
 - Unit test: check streak calculation.
 - Integration test: check React can fetch habits from Django.
@@ -222,7 +240,7 @@ Screenshots: S1, S2, S6, S8.
 
 Simple definition: Test automation means tests run with a command instead of someone checking everything manually.
 
-How we used it: The project is ready for automation through npm and Django commands, but the real automated test suite still needs to be added.
+How we used it: The project can run `npm run lint`, `npm run build`, `.venv/bin/python manage.py check`, and `.venv/bin/python manage.py test`. A sample GitHub Actions workflow is included as a future CI setup example.
 
 Screenshot: S8.
 
@@ -249,4 +267,3 @@ Simple definition: TDD means writing the test first, then writing the code until
 How we used it: We did not fully use TDD in this project. A good future example would be writing a test for "mark habit complete" before coding the complete-habit API.
 
 Screenshot: S8 shows the current test files where TDD could start.
-
