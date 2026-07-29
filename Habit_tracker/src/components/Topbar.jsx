@@ -46,10 +46,10 @@ function Topbar() {
   }).format(new Date())
 
   return (
-    <header className="sticky top-0 z-20 border-b border-white/70 bg-[#f4efe8]/80 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <header className="sticky top-0 z-20 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 rounded-[1.4rem] border border-white/75 bg-[#fffaf4]/72 px-4 py-3 shadow-sm shadow-stone-900/5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-normal text-stone-950">
+          <h1 className="text-2xl font-semibold tracking-normal text-stone-950 sm:text-[1.7rem]">
             {title}
           </h1>
           <p className="mt-1 text-sm text-stone-500">
@@ -58,7 +58,7 @@ function Topbar() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <label className="flex min-w-0 items-center gap-2 rounded-full border border-white/80 bg-white/60 px-4 py-2 text-sm text-stone-500 shadow-sm">
+          <label className="flex min-w-0 items-center gap-2 rounded-full border border-stone-200/70 bg-white/75 px-4 py-2.5 text-sm text-stone-500 shadow-sm">
             <FiSearch className="shrink-0" />
             <input
               type="search"
@@ -67,9 +67,9 @@ function Topbar() {
             />
           </label>
 
-          <div className="flex items-center justify-between gap-3 rounded-full border border-white/80 bg-white/60 px-3 py-2 shadow-sm sm:justify-start">
+          <div className="flex items-center justify-between gap-3 rounded-full border border-stone-200/70 bg-white/75 px-3 py-2 shadow-sm sm:justify-start">
             <span className="text-sm font-medium text-stone-600">{dateLabel}</span>
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8a5637] text-sm font-semibold text-white">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8a5637] text-sm font-semibold text-white shadow-sm ring-4 ring-[#8a5637]/10">
               {initials.toUpperCase()}
             </span>
           </div>

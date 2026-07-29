@@ -1,13 +1,13 @@
 function StatCard({ helper, icon: Icon, label, tone = 'coffee', value }) {
   const tones = {
-    coffee: 'bg-[#8a5637]/10 text-[#744326]',
-    sage: 'bg-emerald-700/10 text-emerald-800',
-    amber: 'bg-amber-600/15 text-amber-800',
-    stone: 'bg-stone-700/10 text-stone-800',
+    coffee: 'bg-[#8a5637]/10 text-[#744326] ring-[#8a5637]/10',
+    sage: 'bg-emerald-700/10 text-emerald-800 ring-emerald-700/10',
+    amber: 'bg-amber-600/15 text-amber-800 ring-amber-600/10',
+    stone: 'bg-stone-700/10 text-stone-800 ring-stone-700/10',
   }
 
   return (
-    <article className="rounded-3xl border border-white/75 bg-white/65 p-5 shadow-xl shadow-stone-900/5 backdrop-blur">
+    <article className="rounded-[1.35rem] border border-white/75 bg-[#fffaf4]/72 p-5 shadow-sm shadow-stone-900/5 backdrop-blur transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-stone-900/6">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-medium text-stone-500">{label}</p>
@@ -17,13 +17,13 @@ function StatCard({ helper, icon: Icon, label, tone = 'coffee', value }) {
         </div>
         {Icon ? (
           <span
-            className={`flex h-10 w-10 items-center justify-center rounded-2xl ${tones[tone]}`}
+            className={`flex h-10 w-10 items-center justify-center rounded-[1rem] ring-4 ${tones[tone]}`}
           >
             <Icon />
           </span>
         ) : null}
       </div>
-      {helper ? <p className="mt-4 text-sm text-stone-500">{helper}</p> : null}
+      {helper ? <p className="mt-4 text-sm leading-5 text-stone-500">{helper}</p> : null}
     </article>
   )
 }

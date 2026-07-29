@@ -5,16 +5,16 @@ function BadgeCard({ badge }) {
 
   return (
     <article
-      className={`rounded-3xl border p-5 shadow-xl shadow-stone-900/5 backdrop-blur ${
+      className={`rounded-[1.4rem] border p-5 shadow-sm shadow-stone-900/5 backdrop-blur transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-stone-900/8 ${
         badge.earned
-          ? 'border-white/75 bg-white/75'
-          : 'border-stone-200/70 bg-white/35'
+          ? 'border-white/75 bg-[#fffaf4]/80'
+          : 'border-stone-200/70 bg-white/40'
       }`}
     >
       <div
-        className={`grid h-14 w-14 place-items-center rounded-2xl text-xl font-semibold ${
+        className={`grid h-14 w-14 place-items-center rounded-[1.1rem] text-xl font-semibold shadow-sm ${
           badge.earned
-            ? 'bg-[#8a5637] text-white'
+            ? 'bg-[#8a5637] text-white ring-4 ring-[#8a5637]/10'
             : 'bg-stone-200/70 text-stone-500'
         }`}
       >

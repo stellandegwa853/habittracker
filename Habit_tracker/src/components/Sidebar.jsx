@@ -37,16 +37,16 @@ function Sidebar() {
 
   return (
     <>
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-white/70 bg-white/45 px-5 py-6 shadow-xl shadow-stone-900/5 backdrop-blur-xl lg:flex lg:flex-col">
-        <NavLink to="/dashboard" className="flex items-center gap-3 px-2">
-          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8a5637] text-sm font-semibold text-white shadow-sm">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-white/70 bg-[#fffaf4]/70 px-5 py-6 shadow-xl shadow-stone-900/5 backdrop-blur-2xl lg:flex lg:flex-col">
+        <NavLink to="/dashboard" className="group flex items-center gap-3 rounded-2xl px-2 py-2 transition hover:bg-white/55">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8a5637] text-sm font-semibold text-white shadow-sm ring-4 ring-[#8a5637]/10">
             ✓
           </span>
           <div>
             <p className="text-lg font-semibold tracking-normal text-stone-950">
               VibeCheck
             </p>
-            <p className="text-xs text-stone-500">Build quietly</p>
+            <p className="text-xs text-stone-500">Small steps, steady rhythm</p>
           </div>
         </NavLink>
 
@@ -56,15 +56,15 @@ function Sidebar() {
           ))}
         </nav>
 
-        <div className="mt-auto rounded-2xl border border-white/70 bg-white/45 p-4">
-          <p className="text-sm font-medium text-stone-800">Small win</p>
+        <div className="mt-auto rounded-[1.4rem] border border-white/75 bg-white/55 p-4 shadow-sm">
+          <p className="text-sm font-semibold text-stone-900">Small win</p>
           <p className="mt-1 text-xs leading-5 text-stone-500">
             Show up once today. That still counts.
           </p>
           <button
             type="button"
             onClick={handleLogout}
-            className="mt-4 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-stone-600 transition hover:bg-white/70 hover:text-stone-950"
+            className="mt-4 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-stone-600 transition hover:bg-white/80 hover:text-stone-950"
           >
             <FiLogOut />
             Logout
@@ -72,7 +72,7 @@ function Sidebar() {
         </div>
       </aside>
 
-      <nav className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-5 rounded-3xl border border-white/70 bg-white/80 p-2 shadow-2xl shadow-stone-900/15 backdrop-blur-xl lg:hidden">
+      <nav className="fixed inset-x-3 bottom-3 z-40 grid grid-cols-5 rounded-[1.6rem] border border-white/75 bg-[#fffaf4]/90 p-2 shadow-2xl shadow-stone-900/15 backdrop-blur-xl lg:hidden">
         {mobileItems.map((item) => {
           const Icon = item.icon
 
@@ -83,8 +83,8 @@ function Sidebar() {
               className={({ isActive }) =>
                 `flex flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[11px] font-medium transition ${
                   isActive
-                    ? 'bg-[#8a5637] text-white'
-                    : 'text-stone-500 hover:bg-stone-100 hover:text-stone-900'
+                    ? 'bg-[#8a5637] text-white shadow-md shadow-[#8a5637]/20'
+                    : 'text-stone-500 hover:bg-white/80 hover:text-stone-900'
                 }`
               }
             >
@@ -105,15 +105,16 @@ function SidebarLink({ item }) {
     <NavLink
       to={item.to}
       className={({ isActive }) =>
-        `flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition ${
+        `group flex items-center gap-3 rounded-[1.1rem] px-4 py-3 text-sm font-medium transition ${
           isActive
-            ? 'bg-[#8a5637] text-white shadow-lg shadow-[#8a5637]/20'
+            ? 'active bg-[#8a5637] text-white shadow-lg shadow-[#8a5637]/18'
             : 'text-stone-600 hover:bg-white/70 hover:text-stone-950'
         }`
       }
     >
       <Icon className="text-lg" />
-      {item.label}
+      <span className="flex-1">{item.label}</span>
+      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-0 transition group-[.active]:opacity-100" />
     </NavLink>
   )
 }
