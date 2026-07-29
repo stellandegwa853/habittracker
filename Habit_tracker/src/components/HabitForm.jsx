@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import CollapsibleSection from './CollapsibleSection'
+import { durationToSeconds, formatDuration } from '../utils/habitTransforms'
 import { categories } from '../utils/mockData'
 
 const defaultValues = {
@@ -10,6 +11,10 @@ const defaultValues = {
   frequency: 'Daily',
   timeOfDay: 'Morning',
   goal: '',
+  goalType: 'simple',
+  targetDurationValue: '',
+  targetDurationUnit: 'minutes',
+  timerEnabled: false,
   reminderTime: '',
   startDate: '',
   moodTag: 'Calm',
@@ -19,6 +24,14 @@ const defaultValues = {
 const frequencyOptions = ['Daily', 'Weekdays', 'Twice weekly', 'Weekly']
 const timeOptions = ['Morning', 'Afternoon', 'Evening', 'Night', 'Weekend']
 const vibeOptions = ['Calm', 'Focused', 'Reset', 'Warm', 'Productive']
+const goalOptions = [
+  { label: 'Simple completion', value: 'simple' },
+  { label: 'Time-based', value: 'time' },
+]
+const durationUnits = [
+  { label: 'minutes', value: 'minutes' },
+  { label: 'hours', value: 'hours' },
+]
 
 function HabitForm({
   error = '',
@@ -28,14 +41,46 @@ function HabitForm({
   submitLabel = 'Save Habit',
 }) {
   const [form, setForm] = useState({ ...defaultValues, ...initialValues })
+  const [fieldErrors, setFieldErrors] = useState({})
+  const isTimeGoal = form.goalType === 'time'
+  const durationSeconds = durationToSeconds(
+    form.targetDurationValue,
+    form.targetDurationUnit,
+  )
 
   function handleChange(event) {
-    const { name, value } = event.target
-    setForm((currentForm) => ({ ...currentForm, [name]: value }))
+    const { checked, name, type, value } = event.target
+    const nextValue = type === 'checkbox' ? checked : value
+
+    setForm((currentForm) => {
+      const nextForm = { ...currentForm, [name]: nextValue }
+
+      if (name === 'goalType' && value === 'simple') {
+        nextForm.timerEnabled = false
+      }
+
+      return nextForm
+    })
+
+    if (name === 'targetDurationValue' || name === 'goalType') {
+      setFieldErrors((currentErrors) => ({
+        ...currentErrors,
+        targetDurationValue: '',
+      }))
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault()
+
+    if (form.goalType === 'time' && !durationSeconds) {
+      setFieldErrors((currentErrors) => ({
+        ...currentErrors,
+        targetDurationValue: 'Add a target duration for this habit.',
+      }))
+      return
+    }
+
     onSubmit?.(form)
   }
 
@@ -111,18 +156,112 @@ function HabitForm({
             </Field>
           </div>
 
+          <section className="mt-6 rounded-[1.25rem] border border-stone-200/70 bg-white/58 p-4">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div>
+                <p className="text-sm font-semibold text-stone-900">
+                  Goal type
+                </p>
+                <p className="mt-1 max-w-xl text-sm leading-6 text-stone-600">
+                  Choose whether this habit is a simple check-in or a timed
+                  session.
+                </p>
+              </div>
+              <select
+                name="goalType"
+                value={form.goalType}
+                onChange={handleChange}
+                className="w-full rounded-2xl border border-stone-200 bg-white/85 px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-[#8a5637]/40 focus:bg-white focus:ring-2 focus:ring-[#8a5637]/15 lg:max-w-56"
+              >
+                {goalOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {isTimeGoal ? (
+              <div className="mt-5 rounded-[1rem] border border-[#8a5637]/10 bg-[#f7f1ea]/70 p-4">
+                <p className="text-sm leading-6 text-stone-600">
+                  Use this for habits like reading, studying, running,
+                  meditation, or workouts.
+                </p>
+
+                <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_0.65fr]">
+                  <Field
+                    error={fieldErrors.targetDurationValue}
+                    label="Target duration"
+                  >
+                    <input
+                      aria-invalid={fieldErrors.targetDurationValue ? 'true' : 'false'}
+                      min="1"
+                      name="targetDurationValue"
+                      placeholder="20"
+                      type="number"
+                      value={form.targetDurationValue}
+                      onChange={handleChange}
+                      className={inputClass}
+                    />
+                  </Field>
+
+                  <Field label="Unit">
+                    <select
+                      name="targetDurationUnit"
+                      value={form.targetDurationUnit}
+                      onChange={handleChange}
+                      className={inputClass}
+                    >
+                      {durationUnits.map((unit) => (
+                        <option key={unit.value} value={unit.value}>
+                          {unit.label}
+                        </option>
+                      ))}
+                    </select>
+                  </Field>
+                </div>
+
+                <label className="mt-4 flex cursor-pointer items-center justify-between gap-4 rounded-2xl border border-stone-200/70 bg-white/70 px-4 py-3">
+                  <span>
+                    <span className="block text-sm font-semibold text-stone-800">
+                      Enable timer
+                    </span>
+                    <span className="mt-1 block text-xs leading-5 text-stone-500">
+                      Start, pause, reset, and finish this habit from the
+                      habit card.
+                    </span>
+                  </span>
+                  <input
+                    checked={form.timerEnabled}
+                    name="timerEnabled"
+                    onChange={handleChange}
+                    type="checkbox"
+                    className="h-5 w-5 rounded border-stone-300 accent-[#8a5637] focus:ring-[#8a5637]/30"
+                  />
+                </label>
+              </div>
+            ) : (
+              <p className="mt-4 rounded-2xl border border-stone-200/70 bg-white/65 px-4 py-3 text-sm leading-6 text-stone-600">
+                Use this for habits you only need to mark as done.
+              </p>
+            )}
+          </section>
+
           <CollapsibleSection
             className="mt-6"
             title="Advanced options"
-            summary="Goal, reminders, start date, vibe tag, and description."
+            summary="Optional note, reminders, start date, vibe tag, and description."
           >
             <div className="grid gap-5 lg:grid-cols-2">
-              <Field label="Goal">
+              <Field
+                helper="Optional note kept for older habits or extra context."
+                label="Goal note"
+              >
                 <input
                   name="goal"
                   value={form.goal}
                   onChange={handleChange}
-                  placeholder="20 minutes"
+                  placeholder="Read before bed"
                   className={inputClass}
                 />
               </Field>
@@ -203,10 +342,16 @@ function HabitForm({
           </div>
           <div className="mt-5 rounded-2xl bg-[#f7f1ea] p-4">
             <p className="text-sm font-semibold text-stone-900">
-              {form.frequency}
+              {isTimeGoal
+                ? `${durationSeconds ? formatDuration(durationSeconds) : 'Timed'} session`
+                : 'Simple completion'}
             </p>
             <p className="mt-1 text-sm leading-6 text-stone-600">
-              {form.goal || 'A simple check-in habit you can complete today.'}
+              {isTimeGoal
+                ? form.timerEnabled
+                  ? 'Timer on. Complete it after the session.'
+                  : 'Timed goal saved without timer controls.'
+                : form.goal || 'A simple check-in habit you can complete today.'}
             </p>
           </div>
         </aside>
@@ -240,11 +385,18 @@ function HabitForm({
   )
 }
 
-function Field({ children, className = '', label }) {
+function Field({ children, className = '', error = '', helper = '', label }) {
   return (
     <label className={`block ${className}`}>
       <span className="text-sm font-semibold text-stone-700">{label}</span>
       {children}
+      {error ? (
+        <span className="mt-2 block text-sm text-red-700">{error}</span>
+      ) : helper ? (
+        <span className="mt-2 block text-xs leading-5 text-stone-500">
+          {helper}
+        </span>
+      ) : null}
     </label>
   )
 }

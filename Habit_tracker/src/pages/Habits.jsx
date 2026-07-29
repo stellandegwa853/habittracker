@@ -152,6 +152,7 @@ function Habits() {
               habit={habit}
               onDelete={handleDelete}
               onMarkDone={handleMarkDone}
+              onNotice={setNotice}
             />
           ))}
         </section>

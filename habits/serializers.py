@@ -41,6 +41,30 @@ class HabitSerializer(serializers.ModelSerializer):
             )
         return value
 
+    def validate(self, attrs):
+        goal_type = attrs.get(
+            "goal_type",
+            getattr(self.instance, "goal_type", Habit.GOAL_SIMPLE)
+        )
+        target_duration_seconds = attrs.get(
+            "target_duration_seconds",
+            getattr(self.instance, "target_duration_seconds", None)
+        )
+
+        if goal_type == Habit.GOAL_TIME:
+            if not target_duration_seconds or target_duration_seconds <= 0:
+                raise serializers.ValidationError({
+                    "target_duration_seconds": (
+                        "Add a target duration for this habit."
+                    )
+                })
+        else:
+            attrs["goal_type"] = Habit.GOAL_SIMPLE
+            attrs["target_duration_seconds"] = None
+            attrs["timer_enabled"] = False
+
+        return attrs
+
     def get_completed_today(self, obj):
         return obj.completions.filter(
             completed_date=timezone.now().date()

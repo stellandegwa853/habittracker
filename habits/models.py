@@ -3,6 +3,13 @@ from django.contrib.auth.models import User
 
 
 class Habit(models.Model):
+    GOAL_SIMPLE = 'simple'
+    GOAL_TIME = 'time'
+    GOAL_TYPE_CHOICES = (
+        (GOAL_SIMPLE, 'Simple completion'),
+        (GOAL_TIME, 'Time-based'),
+    )
+
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -32,6 +39,19 @@ class Habit(models.Model):
         max_length=100,
         blank=True
     )
+
+    goal_type = models.CharField(
+        max_length=20,
+        choices=GOAL_TYPE_CHOICES,
+        default=GOAL_SIMPLE
+    )
+
+    target_duration_seconds = models.PositiveIntegerField(
+        null=True,
+        blank=True
+    )
+
+    timer_enabled = models.BooleanField(default=False)
 
     reminder_time = models.TimeField(
         null=True,

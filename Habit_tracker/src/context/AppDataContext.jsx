@@ -24,6 +24,7 @@ import {
   toHabitView,
   toHabitViews,
 } from '../utils/habitTransforms'
+import { getHabitTimerStorageKey } from '../utils/timerStorage'
 import AppDataContext from './appDataContext'
 
 export function AppDataProvider({ children }) {
@@ -102,6 +103,7 @@ export function AppDataProvider({ children }) {
 
   async function deleteHabitRecord(habitId) {
     await deleteHabit(habitId)
+    localStorage.removeItem(getHabitTimerStorageKey(habitId))
     setHabits((currentHabits) =>
       currentHabits.filter((habit) => habit.id !== Number(habitId)),
     )

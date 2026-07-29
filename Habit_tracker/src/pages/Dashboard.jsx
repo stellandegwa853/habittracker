@@ -9,8 +9,10 @@ import {
 } from 'react-icons/fi'
 import EmptyState from '../components/EmptyState'
 import HabitCard from '../components/HabitCard'
+import HabitTimer from '../components/HabitTimer'
 import StatCard from '../components/StatCard'
 import { useAppData } from '../context/useAppData'
+import { formatDuration } from '../utils/habitTransforms'
 import { moodOptions } from '../utils/mockData'
 
 function Dashboard() {
@@ -55,6 +57,8 @@ function Dashboard() {
   const todayHabits = habits.slice(0, 4)
   const focusHabit =
     habits.find((habit) => !habit.completedToday) || habits[0] || null
+  const focusIsTimed = focusHabit?.goalType === 'time'
+  const focusUsesTimer = focusIsTimed && focusHabit?.timerEnabled
   const allDone = habits.length > 0 && completedToday >= habitsToday
   const moodAdvice =
     {
@@ -107,19 +111,35 @@ function Dashboard() {
                     {focusHabit.title}
                   </h3>
                   <p className="mt-1 text-sm text-stone-500">
-                    {focusHabit.currentStreak} day streak ·{' '}
-                    {focusHabit.frequency}
+                    {focusIsTimed
+                      ? `${formatDuration(
+                          focusHabit.targetDurationSeconds,
+                        )} ${focusHabit.timeOfDay.toLowerCase()} session`
+                      : `${focusHabit.currentStreak} day streak · ${focusHabit.frequency}`}
                   </p>
                 </div>
-                <button
-                  type="button"
-                  disabled={focusHabit.completedToday}
-                  onClick={handleFocusComplete}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#8a5637]/15 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30 disabled:cursor-not-allowed disabled:bg-emerald-100 disabled:text-emerald-800 disabled:shadow-none"
-                >
-                  <FiCheckCircle />
-                  {focusHabit.completedToday ? 'Completed Today' : 'Complete Today'}
-                </button>
+                {focusUsesTimer ? (
+                  <div className="w-full sm:max-w-md">
+                    <HabitTimer
+                      key={`${focusHabit.id}-${focusHabit.targetDurationSeconds}-${focusHabit.completedToday}`}
+                      habit={focusHabit}
+                      onComplete={completeHabitRecord}
+                      onNotice={setNotice}
+                    />
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    disabled={focusHabit.completedToday}
+                    onClick={handleFocusComplete}
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#8a5637]/15 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30 disabled:cursor-not-allowed disabled:bg-emerald-100 disabled:text-emerald-800 disabled:shadow-none"
+                  >
+                    <FiCheckCircle />
+                    {focusHabit.completedToday
+                      ? 'Completed Today'
+                      : 'Complete Today'}
+                  </button>
+                )}
               </div>
             </div>
           ) : (
@@ -291,8 +311,10 @@ function Dashboard() {
             {todayHabits.map((habit) => (
               <HabitCard
                 key={habit.id}
+                allowTimerControls={false}
                 habit={habit}
                 onMarkDone={completeHabitRecord}
+                onNotice={setNotice}
               />
             ))}
           </div>

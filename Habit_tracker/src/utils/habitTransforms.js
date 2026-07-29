@@ -3,27 +3,37 @@ export function toHabitView(habit) {
     return null
   }
 
+  const goalType = habit.goal_type || habit.goalType || 'simple'
+  const targetDurationSeconds = Number(
+    habit.target_duration_seconds ?? habit.targetDurationSeconds ?? 0,
+  )
+
   return {
     id: habit.id,
     title: habit.title || '',
     description: habit.description || '',
     category: habit.category || 'Personal',
     frequency: habit.frequency || 'Daily',
-    currentStreak: habit.current_streak ?? 0,
-    bestStreak: habit.best_streak ?? 0,
-    completedToday: Boolean(habit.completed_today),
-    completionRate: Math.round(Number(habit.completion_rate || 0)),
-    completionCount: habit.completion_count ?? 0,
-    completionDates: habit.completion_dates || [],
-    moodTag: habit.mood_tag || 'Calm',
-    timeOfDay: habit.time_of_day || 'Morning',
+    currentStreak: habit.current_streak ?? habit.currentStreak ?? 0,
+    bestStreak: habit.best_streak ?? habit.bestStreak ?? 0,
+    completedToday: Boolean(habit.completed_today ?? habit.completedToday),
+    completionRate: Math.round(
+      Number(habit.completion_rate ?? habit.completionRate ?? 0),
+    ),
+    completionCount: habit.completion_count ?? habit.completionCount ?? 0,
+    completionDates: habit.completion_dates || habit.completionDates || [],
+    moodTag: habit.mood_tag || habit.moodTag || 'Calm',
+    timeOfDay: habit.time_of_day || habit.timeOfDay || 'Morning',
     goal: habit.goal || '',
-    reminderTime: normalizeTime(habit.reminder_time),
-    startDate: habit.start_date || '',
+    goalType,
+    targetDurationSeconds,
+    timerEnabled: Boolean(habit.timer_enabled ?? habit.timerEnabled),
+    reminderTime: normalizeTime(habit.reminder_time || habit.reminderTime),
+    startDate: habit.start_date || habit.startDate || '',
     color: habit.color || 'coffee',
-    targetDays: habit.target_days || 30,
-    createdAt: habit.created_at,
-    updatedAt: habit.updated_at,
+    targetDays: habit.target_days ?? habit.targetDays ?? 30,
+    createdAt: habit.created_at || habit.createdAt,
+    updatedAt: habit.updated_at || habit.updatedAt,
   }
 }
 
@@ -32,6 +42,12 @@ export function toHabitViews(habits = []) {
 }
 
 export function toHabitPayload(form) {
+  const goalType = form.goalType === 'time' ? 'time' : 'simple'
+  const targetDurationSeconds =
+    goalType === 'time'
+      ? durationToSeconds(form.targetDurationValue, form.targetDurationUnit)
+      : null
+
   const payload = {
     title: form.title,
     description: form.description || '',
@@ -39,6 +55,9 @@ export function toHabitPayload(form) {
     frequency: form.frequency || 'Daily',
     time_of_day: form.timeOfDay || 'Morning',
     goal: form.goal || '',
+    goal_type: goalType,
+    target_duration_seconds: targetDurationSeconds,
+    timer_enabled: goalType === 'time' ? Boolean(form.timerEnabled) : false,
     reminder_time: form.reminderTime || null,
     start_date: form.startDate || null,
     mood_tag: form.moodTag || 'Calm',
@@ -59,6 +78,8 @@ export function toHabitFormValues(habit) {
     return {}
   }
 
+  const durationInput = secondsToDurationInput(view.targetDurationSeconds)
+
   return {
     title: view.title,
     description: view.description,
@@ -66,6 +87,10 @@ export function toHabitFormValues(habit) {
     frequency: view.frequency,
     timeOfDay: view.timeOfDay,
     goal: view.goal,
+    goalType: view.goalType,
+    targetDurationValue: durationInput.value,
+    targetDurationUnit: durationInput.unit,
+    timerEnabled: view.timerEnabled,
     reminderTime: view.reminderTime,
     startDate: view.startDate,
     moodTag: view.moodTag,
@@ -84,6 +109,82 @@ export function normalizeTime(value) {
   }
 
   return value.slice(0, 5)
+}
+
+export function durationToSeconds(value, unit = 'minutes') {
+  const amount = Number(value)
+
+  if (!Number.isFinite(amount) || amount <= 0) {
+    return null
+  }
+
+  return Math.round(amount * (unit === 'hours' ? 3600 : 60))
+}
+
+export function secondsToDurationInput(seconds = 0) {
+  const totalSeconds = Number(seconds) || 0
+
+  if (totalSeconds <= 0) {
+    return {
+      value: '',
+      unit: 'minutes',
+    }
+  }
+
+  if (totalSeconds % 3600 === 0) {
+    return {
+      value: String(totalSeconds / 3600),
+      unit: 'hours',
+    }
+  }
+
+  return {
+    value: String(Math.max(1, Math.round(totalSeconds / 60))),
+    unit: 'minutes',
+  }
+}
+
+export function formatDuration(seconds = 0) {
+  const totalSeconds = Number(seconds) || 0
+
+  if (totalSeconds <= 0) {
+    return 'No duration'
+  }
+
+  if (totalSeconds < 60) {
+    return `${totalSeconds}s`
+  }
+
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+
+  if (!hours) {
+    return `${minutes} min`
+  }
+
+  if (!minutes) {
+    return `${hours} hr${hours === 1 ? '' : 's'}`
+  }
+
+  return `${hours} hr ${minutes} min`
+}
+
+export function formatTimerSeconds(seconds = 0) {
+  const totalSeconds = Math.max(0, Number(seconds) || 0)
+  const hours = Math.floor(totalSeconds / 3600)
+  const minutes = Math.floor((totalSeconds % 3600) / 60)
+  const remainingSeconds = totalSeconds % 60
+  const pad = (value) => String(value).padStart(2, '0')
+
+  if (hours) {
+    return `${hours}:${pad(minutes)}:${pad(remainingSeconds)}`
+  }
+
+  return `${minutes}:${pad(remainingSeconds)}`
+}
+
+export function getGoalTypeLabel(goalType) {
+  return goalType === 'time' ? 'Time-based' : 'Simple'
 }
 
 export function buildWeeklyProgress(habits = []) {

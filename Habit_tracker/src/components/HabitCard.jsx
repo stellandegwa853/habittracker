@@ -8,13 +8,17 @@ import {
   FiTrash2,
 } from 'react-icons/fi'
 import ConfirmModal from './ConfirmModal'
+import HabitTimer from './HabitTimer'
 import ProgressRing from './ProgressRing'
+import { formatDuration } from '../utils/habitTransforms'
 
 function HabitCard({
+  allowTimerControls = true,
   defaultExpanded = false,
   habit,
   onDelete,
   onMarkDone,
+  onNotice,
   showActions = true,
 }) {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded)
@@ -26,16 +30,22 @@ function HabitCard({
 
   const currentStreak = formatDays(habit.currentStreak)
   const bestStreak = formatDays(habit.bestStreak)
-  const statusLabel = habit.completedToday ? 'Completed' : 'Pending'
+  const isTimeGoal = habit.goalType === 'time'
+  const statusLabel = habit.completedToday ? 'Completed Today' : 'Pending'
   const completionButtonLabel = habit.completedToday
     ? 'Completed Today'
     : 'Complete Today'
+  const goalSummary = isTimeGoal
+    ? `${formatDuration(habit.targetDurationSeconds)} session`
+    : 'Simple'
+  const hasTimer = isTimeGoal && habit.timerEnabled
+  const showTimer = allowTimerControls && hasTimer
 
   return (
     <article className="group overflow-hidden rounded-[1.25rem] border border-white/75 bg-[#fffaf4]/82 shadow-sm shadow-stone-900/5 backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-stone-900/8">
       <div className="h-1 bg-[#8a5637]/70" />
       <div className="p-4 sm:p-5">
-        <div className="grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+        <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_minmax(18rem,auto)] md:items-center">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <span className="whitespace-nowrap rounded-full border border-[#8a5637]/10 bg-[#8a5637]/8 px-3 py-1 text-xs font-medium text-[#744326]">
@@ -44,6 +54,14 @@ function HabitCard({
               <span className="whitespace-nowrap rounded-full border border-stone-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-stone-500">
                 {habit.timeOfDay}
               </span>
+              <span className="whitespace-nowrap rounded-full border border-stone-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-stone-600">
+                {goalSummary}
+              </span>
+              {hasTimer ? (
+                <span className="whitespace-nowrap rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-800">
+                  Timer on
+                </span>
+              ) : null}
               <span
                 className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold ${
                   habit.completedToday
@@ -58,21 +76,35 @@ function HabitCard({
               {habit.title}
             </h3>
             <p className="mt-1 text-sm text-stone-500">
-              {currentStreak} streak · {habit.frequency}
+              {isTimeGoal
+                ? `${goalSummary} · ${currentStreak} streak`
+                : `${currentStreak} streak · ${habit.frequency}`}
             </p>
           </div>
 
           {showActions ? (
             <div className="flex flex-wrap items-center gap-2 md:justify-end">
-              <button
-                type="button"
-                disabled={habit.completedToday}
-                onClick={() => onMarkDone?.(habit.id)}
-                className="inline-flex items-center gap-2 rounded-full bg-[#8a5637] px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-[#8a5637]/20 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30 disabled:cursor-not-allowed disabled:bg-emerald-100 disabled:text-emerald-800 disabled:shadow-none"
-              >
-                <FiCheck />
-                {completionButtonLabel}
-              </button>
+              {showTimer ? (
+                <div className="w-full md:w-[24rem] md:max-w-full">
+                  <HabitTimer
+                    key={`${habit.id}-${habit.targetDurationSeconds}-${habit.completedToday}`}
+                    compact={!isExpanded}
+                    habit={habit}
+                    onComplete={onMarkDone}
+                    onNotice={onNotice}
+                  />
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  disabled={habit.completedToday}
+                  onClick={() => onMarkDone?.(habit.id)}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#8a5637] px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-[#8a5637]/20 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30 disabled:cursor-not-allowed disabled:bg-emerald-100 disabled:text-emerald-800 disabled:shadow-none"
+                >
+                  <FiCheck />
+                  {completionButtonLabel}
+                </button>
+              )}
               <button
                 type="button"
                 aria-expanded={isExpanded}
@@ -101,12 +133,34 @@ function HabitCard({
                 {habit.description || 'No description added yet.'}
               </p>
 
-              <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
                 <Info label="Frequency" value={habit.frequency} />
-                <Info label="Best" value={bestStreak} />
+                <Info label="Streak" value={currentStreak} />
+                <Info label="Best streak" value={bestStreak} />
+                <Info label="Target" value={goalSummary} />
+                <Info
+                  label="Timer"
+                  value={
+                    isTimeGoal
+                      ? habit.timerEnabled
+                        ? 'On'
+                        : 'Off'
+                      : 'Not needed'
+                  }
+                />
                 <Info label="Mood" value={habit.moodTag} />
-                <Info label="Goal" value={habit.goal || 'Not set'} />
               </div>
+
+              {habit.goal ? (
+                <div className="mt-4 rounded-[1rem] border border-stone-200/60 bg-white/58 px-4 py-3">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.06em] text-stone-400">
+                    Goal note
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-stone-600">
+                    {habit.goal}
+                  </p>
+                </div>
+              ) : null}
 
               <div className="mt-4 rounded-[1.15rem] border border-stone-200/60 bg-white/58 p-4">
                 <ProgressRing

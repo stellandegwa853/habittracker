@@ -10,6 +10,9 @@ class HabitAdmin(admin.ModelAdmin):
         "category",
         "frequency",
         "time_of_day",
+        "goal_type",
+        "target_duration_seconds",
+        "timer_enabled",
         "target_days",
         "created_at",
     )
@@ -20,6 +23,7 @@ class HabitAdmin(admin.ModelAdmin):
     list_filter = (
         "category",
         "frequency",
+        "goal_type",
         "time_of_day",
         "created_at",
     )

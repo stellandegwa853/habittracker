@@ -4,7 +4,7 @@ import EmptyState from '../components/EmptyState'
 import ProgressRing from '../components/ProgressRing'
 import StatCard from '../components/StatCard'
 import { useAppData } from '../context/useAppData'
-import { buildCalendarDays } from '../utils/habitTransforms'
+import { buildCalendarDays, formatDuration } from '../utils/habitTransforms'
 
 function HabitDetails() {
   const { id } = useParams()
@@ -13,6 +13,10 @@ function HabitDetails() {
   const habit = habits.find((item) => String(item.id) === id)
   const miniDays = buildCalendarDays(habit ? [habit] : []).slice(0, 21)
   const notice = location.state?.notice
+  const isTimedHabit = habit?.goalType === 'time'
+  const goalSummary = isTimedHabit
+    ? `${formatDuration(habit.targetDurationSeconds)} session`
+    : 'Simple completion'
 
   if (isLoading) {
     return (
@@ -49,9 +53,19 @@ function HabitDetails() {
 
       <section className="grid gap-6 lg:grid-cols-[1.4fr_0.8fr]">
         <div className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
-          <span className="rounded-full bg-[#8a5637]/10 px-4 py-2 text-sm font-medium text-[#744326]">
-            {habit.category}
-          </span>
+          <div className="flex flex-wrap gap-2">
+            <span className="rounded-full bg-[#8a5637]/10 px-4 py-2 text-sm font-medium text-[#744326]">
+              {habit.category}
+            </span>
+            <span className="rounded-full bg-stone-100 px-4 py-2 text-sm font-medium text-stone-700">
+              {goalSummary}
+            </span>
+            {isTimedHabit ? (
+              <span className="rounded-full bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-800">
+                {habit.timerEnabled ? 'Timer on' : 'Timer off'}
+              </span>
+            ) : null}
+          </div>
           <h2 className="mt-5 text-4xl font-semibold tracking-normal text-stone-950">
             {habit.title}
           </h2>
@@ -79,10 +93,11 @@ function HabitDetails() {
         </div>
       </section>
 
-      <section className="grid gap-4 sm:grid-cols-3">
+      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard label="Streak" value={`${habit.currentStreak}d`} />
         <StatCard label="Best" value={`${habit.bestStreak}d`} tone="amber" />
         <StatCard label="Frequency" value={habit.frequency} tone="stone" />
+        <StatCard label="Goal" value={goalSummary} tone="sage" />
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
@@ -120,8 +135,12 @@ function HabitDetails() {
           Notes and reminder
         </h3>
         <p className="mt-3 text-sm leading-6 text-stone-600">
-          Reminder set for {habit.reminderTime || 'no time yet'}. Keep this
-          habit light enough to repeat on an ordinary day.
+          Reminder set for {habit.reminderTime || 'no time yet'}.{' '}
+          {isTimedHabit
+            ? `Target ${goalSummary.toLowerCase()} with ${
+                habit.timerEnabled ? 'timer support' : 'timer support off'
+              }.`
+            : 'This is a simple habit you only need to mark complete.'}
         </p>
       </section>
     </div>
