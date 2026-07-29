@@ -20,22 +20,26 @@ function CalendarGrid({ days, onSelectDay, selectedDay }) {
             )
           }
 
-          const isSelected = selectedDay?.day === day.day
+          const isSelected = selectedDay?.date === day.date
 
           return (
             <button
               key={day.day}
               type="button"
               onClick={() => onSelectDay?.(day)}
-              className={`aspect-square rounded-2xl border text-sm font-medium transition ${
+              className={`aspect-square rounded-2xl border text-sm font-semibold transition duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#8a5637]/25 ${
                 isSelected
                   ? 'border-[#8a5637] bg-[#8a5637] text-white shadow-lg shadow-[#8a5637]/20'
                   : day.today
                     ? 'border-amber-300 bg-amber-100 text-amber-900'
                     : day.completed
                       ? 'border-emerald-100 bg-emerald-50 text-emerald-800'
+                      : day.partial
+                        ? 'border-[#8a5637]/20 bg-[#8a5637]/10 text-[#744326]'
                       : day.missed
                         ? 'border-red-100 bg-red-50 text-red-700'
+                        : day.future
+                          ? 'border-stone-100 bg-white/35 text-stone-400'
                         : 'border-stone-100 bg-white/70 text-stone-600 hover:border-stone-200'
               }`}
             >

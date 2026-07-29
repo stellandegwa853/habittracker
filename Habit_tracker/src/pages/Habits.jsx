@@ -39,14 +39,6 @@ function Habits() {
   }, [category, habits, query])
 
   async function handleDelete(habitId) {
-    const shouldDelete = window.confirm(
-      'Delete this habit? This will remove it from your account.',
-    )
-
-    if (!shouldDelete) {
-      return
-    }
-
     try {
       await deleteHabitRecord(habitId)
       setNotice('Habit deleted.')
@@ -73,15 +65,15 @@ function Habits() {
 
   return (
     <div className="space-y-6">
-      <section className="flex flex-col gap-4 rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur sm:flex-row sm:items-end sm:justify-between">
+      <section className="flex flex-col gap-4 rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/76 p-5 shadow-sm shadow-stone-900/5 backdrop-blur sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-sm font-medium text-[#744326]">My Habits</p>
-          <h2 className="mt-2 text-4xl font-semibold tracking-normal text-stone-950">
-            Keep the chain alive
+          <h2 className="mt-2 text-3xl font-semibold tracking-normal text-stone-950">
+            Manage daily check-ins
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
             Your saved habits from Django. Search, complete, edit, or create a
-            new rhythm from here.
+            new habit from here.
           </p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-stone-600">
             <span className="rounded-full bg-white/70 px-3 py-1">
@@ -95,14 +87,14 @@ function Habits() {
         </div>
         <Link
           to="/habits/create"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-medium text-white shadow-lg shadow-[#8a5637]/15 transition hover:bg-[#744326]"
+          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#8a5637]/15 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
         >
           <FiPlus />
           Add Habit
         </Link>
       </section>
 
-      <section className="rounded-3xl border border-white/75 bg-white/65 p-4 shadow-xl shadow-stone-900/5 backdrop-blur">
+      <section className="rounded-[1.25rem] border border-white/75 bg-[#fffaf4]/76 p-3 shadow-sm shadow-stone-900/5 backdrop-blur">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <label className="flex flex-1 items-center gap-2 rounded-2xl border border-stone-200 bg-white/80 px-4 py-3 text-sm text-stone-500">
             <FiSearch />

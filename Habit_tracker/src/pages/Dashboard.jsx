@@ -9,7 +9,6 @@ import {
 } from 'react-icons/fi'
 import EmptyState from '../components/EmptyState'
 import HabitCard from '../components/HabitCard'
-import ProgressRing from '../components/ProgressRing'
 import StatCard from '../components/StatCard'
 import { useAppData } from '../context/useAppData'
 import { moodOptions } from '../utils/mockData'
@@ -25,6 +24,7 @@ function Dashboard() {
     weeklyProgress,
   } = useAppData()
   const [selectedMood, setSelectedMood] = useState('Calm')
+  const [notice, setNotice] = useState('')
 
   if (isLoading) {
     return (
@@ -55,66 +55,118 @@ function Dashboard() {
   const todayHabits = habits.slice(0, 4)
   const focusHabit =
     habits.find((habit) => !habit.completedToday) || habits[0] || null
+  const allDone = habits.length > 0 && completedToday >= habitsToday
+  const moodAdvice =
+    {
+      Focused: 'Use the energy for one important habit first.',
+      Tired: 'Choose the lightest version that still counts.',
+      Motivated: 'Complete one habit, then decide if you want another.',
+      Calm: 'Keep the pace steady and simple.',
+      Reset: 'Restart with one easy check-in today.',
+    }[selectedMood] || 'Pick one habit and complete it today.'
+
+  async function handleFocusComplete() {
+    if (!focusHabit || focusHabit.completedToday) {
+      return
+    }
+
+    try {
+      await completeHabitRecord(focusHabit.id)
+      setNotice(`${focusHabit.title} completed for today.`)
+    } catch {
+      setNotice('That habit could not be completed right now.')
+    }
+  }
 
   return (
     <div className="space-y-6">
-      <section className="grid gap-6 lg:grid-cols-[1.5fr_0.8fr]">
-        <div className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur sm:p-8">
-          <span className="inline-flex rounded-full bg-[#8a5637]/10 px-4 py-2 text-sm font-medium text-[#744326]">
-            Today&apos;s Vibe: {selectedMood}
-          </span>
-          <h2 className="mt-6 max-w-2xl text-4xl font-semibold tracking-normal text-stone-950 sm:text-5xl">
+      <section className="grid gap-5 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="rounded-[1.7rem] border border-white/75 bg-[#fffaf4]/78 p-6 shadow-sm shadow-stone-900/5 backdrop-blur sm:p-7">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <p className="text-sm font-semibold text-[#744326]">
+                Today&apos;s check-in
+              </p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-normal text-stone-950">
+                {allDone ? 'All habits complete' : 'Complete the next habit'}
+              </h2>
+            </div>
+            <span className="rounded-full bg-white/75 px-4 py-2 text-sm font-semibold text-stone-700">
+              {completedToday}/{habitsToday || 0} complete
+            </span>
+          </div>
+
+          {focusHabit ? (
+            <div className="mt-6 rounded-[1.25rem] border border-stone-200/70 bg-white/68 p-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.08em] text-stone-400">
+                    {focusHabit.category} · {focusHabit.timeOfDay}
+                  </p>
+                  <h3 className="mt-2 text-2xl font-semibold text-stone-950">
+                    {focusHabit.title}
+                  </h3>
+                  <p className="mt-1 text-sm text-stone-500">
+                    {focusHabit.currentStreak} day streak ·{' '}
+                    {focusHabit.frequency}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  disabled={focusHabit.completedToday}
+                  onClick={handleFocusComplete}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#8a5637]/15 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30 disabled:cursor-not-allowed disabled:bg-emerald-100 disabled:text-emerald-800 disabled:shadow-none"
+                >
+                  <FiCheckCircle />
+                  {focusHabit.completedToday ? 'Completed Today' : 'Complete Today'}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <EmptyState
+              actionLabel="Create your first habit"
+              actionTo="/habits/create"
+              title="No habits yet"
+              message="Start with one habit. The dashboard will become more useful after your first check-in."
+            />
+          )}
+
+          {notice ? (
+            <p className="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
+              {notice}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="rounded-[1.7rem] border border-white/75 bg-[#8a5637] p-6 text-white shadow-lg shadow-[#8a5637]/15">
+          <p className="text-sm font-medium text-white/75">
             Good to see you back{profile?.first_name ? `, ${profile.first_name}` : ''}
-          </h2>
-          <p className="mt-4 max-w-xl text-base leading-7 text-stone-600">
-            Small steps today. Better habits tomorrow. You do not need a perfect
-            day, just one honest check-in.
           </p>
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+          <h3 className="mt-3 text-3xl font-semibold">
+            {completionRate}% done today
+          </h3>
+          <p className="mt-3 text-sm leading-6 text-white/75">
+            {allDone
+              ? "You have finished today's list."
+              : `${Math.max(habitsToday - completedToday, 0)} habit${
+                  habitsToday - completedToday === 1 ? '' : 's'
+                } left to check in.`}
+          </p>
+          <div className="mt-6 flex flex-col gap-3">
             <Link
               to="/habits/create"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#8a5637]/15 transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#744326] transition hover:bg-white/90 focus:outline-none focus:ring-2 focus:ring-white/45"
             >
               <FiPlus />
               Create Habit
             </Link>
             <Link
               to="/habits"
-              className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white/75 px-5 py-3 text-sm font-semibold text-stone-700 transition hover:border-stone-300 hover:bg-white hover:text-stone-950 focus:outline-none focus:ring-2 focus:ring-stone-300"
+              className="inline-flex items-center justify-center rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             >
               View Habits
             </Link>
           </div>
-        </div>
-
-        <div className="rounded-[2rem] border border-white/75 bg-[#8a5637] p-6 text-white shadow-xl shadow-[#8a5637]/20">
-          <p className="text-sm font-medium text-white/75">Today&apos;s focus</p>
-          {focusHabit ? (
-            <>
-              <h3 className="mt-3 text-2xl font-semibold">{focusHabit.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-white/75">
-                {focusHabit.description || 'One small repeat is enough.'}
-              </p>
-              <div className="mt-6 rounded-3xl bg-white/12 p-4">
-                <p className="text-sm text-white/70">Keep the chain alive</p>
-                <p className="mt-1 text-3xl font-semibold">
-                  {focusHabit.currentStreak} days
-                </p>
-              </div>
-            </>
-          ) : (
-            <>
-              <p className="mt-4 text-sm leading-6 text-white/75">
-                Create your first habit and it will become today&apos;s focus.
-              </p>
-              <Link
-                to="/habits/create"
-                className="mt-6 inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#744326]"
-              >
-                Start a habit
-              </Link>
-            </>
-          )}
         </div>
       </section>
 
@@ -149,12 +201,12 @@ function Dashboard() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
-        <div className="rounded-3xl border border-white/75 bg-white/65 p-5 shadow-xl shadow-stone-900/5 backdrop-blur">
+        <div className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-5 shadow-sm shadow-stone-900/5 backdrop-blur">
           <h3 className="text-xl font-semibold text-stone-950">
             Daily Vibe Check
           </h3>
           <p className="mt-2 text-sm leading-6 text-stone-600">
-            Pick the energy you&apos;re carrying into today.
+            Pick today&apos;s energy. This changes the suggestion below.
           </p>
           <div className="mt-5 flex flex-wrap gap-2">
             {moodOptions.map((mood) => (
@@ -173,12 +225,17 @@ function Dashboard() {
             ))}
           </div>
 
-          <div className="mt-6 rounded-3xl bg-stone-50/80 p-5">
-            <ProgressRing label="Today completion" value={completionRate} />
+          <div className="mt-6 rounded-[1.15rem] border border-stone-200/70 bg-white/70 p-4">
+            <p className="text-sm font-semibold text-stone-900">
+              {selectedMood} suggestion
+            </p>
+            <p className="mt-1 text-sm leading-6 text-stone-600">
+              {moodAdvice}
+            </p>
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/75 bg-white/65 p-5 shadow-xl shadow-stone-900/5 backdrop-blur">
+        <div className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-5 shadow-sm shadow-stone-900/5 backdrop-blur">
           <h3 className="text-xl font-semibold text-stone-950">
             Weekly progress
           </h3>

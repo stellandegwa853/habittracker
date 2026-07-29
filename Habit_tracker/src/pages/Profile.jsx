@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
+import CollapsibleSection from '../components/CollapsibleSection'
 import EmptyState from '../components/EmptyState'
 import { useAppData } from '../context/useAppData'
+import { getApiErrorMessage } from '../utils/errorMessages'
 
 function Profile() {
   const { dashboard, habits, isLoading, profile, updateProfileRecord } =
@@ -12,6 +14,7 @@ function Profile() {
     email: '',
   })
   const [notice, setNotice] = useState('')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     let syncTimer
@@ -46,8 +49,16 @@ function Profile() {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    await updateProfileRecord(form)
-    setNotice('Profile updated.')
+    setError('')
+
+    try {
+      await updateProfileRecord(form)
+      setNotice('Profile updated.')
+    } catch (requestError) {
+      setError(
+        getApiErrorMessage(requestError, 'Could not update your profile.'),
+      )
+    }
   }
 
   const initials = `${form.first_name?.[0] || ''}${form.last_name?.[0] || ''}` || 'VC'
@@ -62,7 +73,7 @@ function Profile() {
   return (
     <div className="space-y-6">
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
+        <div className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-6 shadow-sm shadow-stone-900/5 backdrop-blur">
           <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#8a5637] text-2xl font-semibold text-white">
             {initials.toUpperCase()}
           </div>
@@ -86,11 +97,23 @@ function Profile() {
         </div>
       </section>
 
-      <section className="rounded-3xl border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
-        <h3 className="text-xl font-semibold text-stone-950">Edit profile</h3>
+      <section className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-5 shadow-sm shadow-stone-900/5 backdrop-blur">
+        <CollapsibleSection
+          defaultOpen={false}
+          title="Edit Profile"
+          summary="Update your name, username, or email."
+        >
         {notice ? (
           <p className="mt-4 rounded-2xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
             {notice}
+          </p>
+        ) : null}
+        {error ? (
+          <p
+            role="alert"
+            className="mt-4 rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700"
+          >
+            {error}
           </p>
         ) : null}
         <form onSubmit={handleSubmit}>
@@ -128,6 +151,7 @@ function Profile() {
             Save profile
           </button>
         </form>
+        </CollapsibleSection>
       </section>
     </div>
   )
@@ -135,7 +159,7 @@ function Profile() {
 
 function Summary({ label, value }) {
   return (
-    <div className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5">
+    <div className="rounded-[1.25rem] border border-white/75 bg-[#fffaf4]/76 p-5 shadow-sm shadow-stone-900/5">
       <p className="text-sm font-medium text-stone-500">{label}</p>
       <p className="mt-3 text-3xl font-semibold text-stone-950">{value}</p>
     </div>

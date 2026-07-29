@@ -57,13 +57,13 @@ function EditHabit() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
+      <section className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/76 p-5 shadow-sm shadow-stone-900/5 backdrop-blur">
         <p className="text-sm font-medium text-[#744326]">Edit habit</p>
-        <h2 className="mt-2 text-4xl font-semibold tracking-normal text-stone-950">
-          Adjust the rhythm
+        <h2 className="mt-2 text-3xl font-semibold tracking-normal text-stone-950">
+          Update this check-in
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
-          Change what needs changing. A habit can evolve with your actual life.
+          Change the details that matter and keep the rest simple.
         </p>
       </section>
 

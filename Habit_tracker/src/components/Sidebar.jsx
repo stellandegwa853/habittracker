@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import {
   FiAward,
   FiBarChart2,
@@ -29,6 +29,8 @@ const mobileItems = navItems.filter((item) =>
 
 function Sidebar() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const helper = getHelperText(location.pathname)
 
   function handleLogout() {
     clearTokens()
@@ -37,7 +39,7 @@ function Sidebar() {
 
   return (
     <>
-      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-white/70 bg-[#fffaf4]/70 px-5 py-6 shadow-xl shadow-stone-900/5 backdrop-blur-2xl lg:flex lg:flex-col">
+      <aside className="fixed inset-y-0 left-0 z-30 hidden w-72 border-r border-white/70 bg-[#fffaf4]/72 px-5 py-6 shadow-lg shadow-stone-900/4 backdrop-blur-2xl lg:flex lg:flex-col">
         <NavLink to="/dashboard" className="group flex items-center gap-3 rounded-2xl px-2 py-2 transition hover:bg-white/55">
           <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8a5637] text-sm font-semibold text-white shadow-sm ring-4 ring-[#8a5637]/10">
             ✓
@@ -46,25 +48,25 @@ function Sidebar() {
             <p className="text-lg font-semibold tracking-normal text-stone-950">
               VibeCheck
             </p>
-            <p className="text-xs text-stone-500">Small steps, steady rhythm</p>
+            <p className="text-xs text-stone-500">Daily habit check-ins</p>
           </div>
         </NavLink>
 
-        <nav className="mt-10 space-y-2">
+        <nav className="mt-9 space-y-1.5">
           {navItems.map((item) => (
             <SidebarLink key={item.to} item={item} />
           ))}
         </nav>
 
-        <div className="mt-auto rounded-[1.4rem] border border-white/75 bg-white/55 p-4 shadow-sm">
-          <p className="text-sm font-semibold text-stone-900">Small win</p>
+        <div className="mt-auto rounded-[1.25rem] border border-white/75 bg-white/55 p-4 shadow-sm">
+          <p className="text-sm font-semibold text-stone-900">{helper.title}</p>
           <p className="mt-1 text-xs leading-5 text-stone-500">
-            Show up once today. That still counts.
+            {helper.message}
           </p>
           <button
             type="button"
             onClick={handleLogout}
-            className="mt-4 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-stone-600 transition hover:bg-white/80 hover:text-stone-950"
+            className="mt-4 inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-stone-600 transition duration-200 hover:bg-white/80 hover:text-stone-950 focus:outline-none focus:ring-2 focus:ring-[#8a5637]/20"
           >
             <FiLogOut />
             Logout
@@ -105,18 +107,53 @@ function SidebarLink({ item }) {
     <NavLink
       to={item.to}
       className={({ isActive }) =>
-        `group flex items-center gap-3 rounded-[1.1rem] px-4 py-3 text-sm font-medium transition ${
+        `group relative flex items-center gap-3 rounded-[1rem] px-4 py-3 text-sm transition duration-200 ${
           isActive
-            ? 'active bg-[#8a5637] text-white shadow-lg shadow-[#8a5637]/18'
-            : 'text-stone-600 hover:bg-white/70 hover:text-stone-950'
+            ? 'active bg-white/72 font-semibold text-[#744326] shadow-sm'
+            : 'font-medium text-stone-600 hover:bg-white/60 hover:text-stone-950'
         }`
       }
     >
+      <span className="absolute left-0 h-6 w-1 rounded-r-full bg-[#8a5637] opacity-0 transition group-[.active]:opacity-100" />
       <Icon className="text-lg" />
       <span className="flex-1">{item.label}</span>
-      <span className="h-1.5 w-1.5 rounded-full bg-current opacity-0 transition group-[.active]:opacity-100" />
     </NavLink>
   )
+}
+
+function getHelperText(pathname) {
+  if (pathname.startsWith('/habits')) {
+    return {
+      title: 'Today first',
+      message: 'Complete what is due, then open details only when needed.',
+    }
+  }
+
+  if (pathname.startsWith('/calendar')) {
+    return {
+      title: 'History view',
+      message: 'Use the calendar to spot patterns across the month.',
+    }
+  }
+
+  if (pathname.startsWith('/statistics')) {
+    return {
+      title: 'Progress check',
+      message: 'A few consistent days will make the insights more useful.',
+    }
+  }
+
+  if (pathname.startsWith('/settings')) {
+    return {
+      title: 'Account controls',
+      message: 'Keep reminders and account details up to date.',
+    }
+  }
+
+  return {
+    title: 'Next check-in',
+    message: 'Pick one habit and complete it today.',
+  }
 }
 
 export default Sidebar

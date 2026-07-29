@@ -44,10 +44,11 @@ function Topbar() {
     month: 'short',
     day: 'numeric',
   }).format(new Date())
+  const showNewHabit = location.pathname !== '/habits/create'
 
   return (
-    <header className="sticky top-0 z-20 px-4 py-4 backdrop-blur-xl sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-4 rounded-[1.4rem] border border-white/75 bg-[#fffaf4]/72 px-4 py-3 shadow-sm shadow-stone-900/5 sm:flex-row sm:items-center sm:justify-between">
+    <header className="sticky top-0 z-20 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl flex-col gap-4 rounded-[1.25rem] border border-white/75 bg-[#fffaf4]/76 px-4 py-3 shadow-sm shadow-stone-900/5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-normal text-stone-950 sm:text-[1.7rem]">
             {title}
@@ -58,13 +59,15 @@ function Topbar() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <Link
-            to="/habits/create"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-[#8a5637]/15 transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
-          >
-            <FiPlus />
-            New Habit
-          </Link>
+          {showNewHabit ? (
+            <Link
+              to="/habits/create"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-[#8a5637]/15 transition duration-200 hover:bg-[#744326] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
+            >
+              <FiPlus />
+              New Habit
+            </Link>
+          ) : null}
 
           <div className="flex items-center justify-between gap-3 rounded-full border border-stone-200/70 bg-white/75 px-3 py-2 shadow-sm sm:justify-start">
             <span className="text-sm font-medium text-stone-600">{dateLabel}</span>

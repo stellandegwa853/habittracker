@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
+import ConfirmModal from '../components/ConfirmModal'
 import EmptyState from '../components/EmptyState'
 import { useAppData } from '../context/useAppData'
 import { changePassword } from '../services/api'
 
 function Settings() {
-  const { isLoading, preferences, updatePreferencesRecord } = useAppData()
+  const { habits, isLoading, preferences, profile, updatePreferencesRecord } =
+    useAppData()
   const [form, setForm] = useState({
     reminder_enabled: true,
     daily_notification_time: '',
@@ -13,9 +15,11 @@ function Settings() {
   const [passwordForm, setPasswordForm] = useState({
     current_password: '',
     new_password: '',
+    confirm_new_password: '',
   })
   const [notice, setNotice] = useState('')
   const [error, setError] = useState('')
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
   useEffect(() => {
     let syncTimer
@@ -68,8 +72,20 @@ function Settings() {
     setNotice('')
 
     try {
-      await changePassword(passwordForm)
-      setPasswordForm({ current_password: '', new_password: '' })
+      if (passwordForm.new_password !== passwordForm.confirm_new_password) {
+        setError('New passwords do not match.')
+        return
+      }
+
+      await changePassword({
+        current_password: passwordForm.current_password,
+        new_password: passwordForm.new_password,
+      })
+      setPasswordForm({
+        current_password: '',
+        new_password: '',
+        confirm_new_password: '',
+      })
       setNotice('Password updated. Use the new password next time you log in.')
     } catch (requestError) {
       const responseData = requestError.response?.data
@@ -82,15 +98,35 @@ function Settings() {
     }
   }
 
+  function exportData() {
+    const payload = {
+      exported_at: new Date().toISOString(),
+      profile,
+      preferences: form,
+      habits,
+    }
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: 'application/json',
+    })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+
+    link.href = url
+    link.download = 'vibecheck-data.json'
+    link.click()
+    URL.revokeObjectURL(url)
+    setNotice('Export downloaded.')
+  }
+
   return (
     <div className="space-y-6">
-      <section className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
+      <section className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/76 p-5 shadow-sm shadow-stone-900/5 backdrop-blur">
         <p className="text-sm font-medium text-[#744326]">Settings</p>
-        <h2 className="mt-2 text-4xl font-semibold tracking-normal text-stone-950">
-          Make VibeCheck yours
+        <h2 className="mt-2 text-3xl font-semibold tracking-normal text-stone-950">
+          Account and preferences
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
-          Reminder and theme preferences are saved to your Django account.
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
+          Manage reminders, appearance, data export, and account security.
         </p>
       </section>
 
@@ -125,16 +161,25 @@ function Settings() {
               type="password"
               value={passwordForm.new_password}
             />
+            <Field
+              label="Confirm new password"
+              name="confirm_new_password"
+              onChange={updatePasswordForm}
+              placeholder="Repeat new password"
+              type="password"
+              value={passwordForm.confirm_new_password}
+            />
             <button
               type="submit"
-              className="rounded-full bg-[#8a5637] px-5 py-3 text-sm font-medium text-white"
+              className="rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
             >
               Change password
             </button>
           </form>
           <button
             type="button"
-            className="rounded-full border border-red-100 bg-red-50 px-4 py-2 text-sm font-medium text-red-700"
+            onClick={() => setIsDeleteOpen(true)}
+            className="rounded-full border border-red-100 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-300"
           >
             Delete account
           </button>
@@ -173,38 +218,43 @@ function Settings() {
             onClick={() => savePreferences({ dark_mode: !form.dark_mode })}
           />
           <p className="text-sm text-stone-500">
-            Preference is saved now. Full dark theme styling can come next.
+            Your appearance preference is saved with your account.
           </p>
         </Panel>
 
         <Panel title="Data settings">
           <button
             type="button"
-            onClick={() => {
-              const payload = {
-                profile: 'Use the Profile page for account details.',
-                habits: 'Export from frontend is ready for wiring to a file.',
-              }
-              console.log('VibeCheck export data:', payload)
-              setNotice('Export data prepared in the console for now.')
-            }}
-            className="rounded-full bg-[#8a5637] px-5 py-3 text-sm font-medium text-white"
+            onClick={exportData}
+            className="rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
           >
             Export data
           </button>
           <p className="text-sm leading-6 text-stone-500">
-            Export is still visual for now; your live habit data is stored in
-            Django.
+            Download a JSON copy of your profile, preferences, and habits.
           </p>
         </Panel>
       </section>
+
+      <ConfirmModal
+        isOpen={isDeleteOpen}
+        title="Delete account?"
+        message="Account deletion is permanent. This version does not support deleting an account from the app, so no data will be removed from this button."
+        confirmLabel="I understand"
+        tone="danger"
+        onCancel={() => setIsDeleteOpen(false)}
+        onConfirm={() => {
+          setIsDeleteOpen(false)
+          setNotice('Account deletion requires administrator support.')
+        }}
+      />
     </div>
   )
 }
 
 function Panel({ children, title }) {
   return (
-    <section className="space-y-5 rounded-3xl border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
+    <section className="space-y-5 rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-6 shadow-sm shadow-stone-900/5 backdrop-blur">
       <h3 className="text-xl font-semibold text-stone-950">{title}</h3>
       {children}
     </section>

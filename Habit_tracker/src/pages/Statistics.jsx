@@ -11,6 +11,21 @@ function Statistics() {
         habit.completionRate > best.completionRate ? habit : best,
       habits[0] || { title: 'None yet', completionRate: 0, bestStreak: 0 },
     ) || {}
+  const mostMissedHabit =
+    habits.reduce(
+      (lowest, habit) =>
+        habit.completionRate < lowest.completionRate ? habit : lowest,
+      habits[0] || { title: 'None yet', completionRate: 100 },
+    ) || {}
+  const bestTimeOfDay =
+    Object.entries(
+      habits.reduce((items, habit) => {
+        items[habit.timeOfDay] = (items[habit.timeOfDay] || 0) + habit.completionRate
+        return items
+      }, {}),
+    ).sort((a, b) => b[1] - a[1])[0]?.[0] || 'Not enough data'
+  const totalCompletions = dashboard?.total_completed ?? 0
+  const hasUsefulData = habits.length > 0 && totalCompletions > 0
 
   const categoryBreakdown = habits.reduce((items, habit) => {
     const existing = items.find((item) => item.category === habit.category)
@@ -44,18 +59,26 @@ function Statistics() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[2rem] border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5 backdrop-blur">
+      <section className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/76 p-5 shadow-sm shadow-stone-900/5 backdrop-blur">
         <p className="text-sm font-medium text-[#744326]">
           Progress & Statistics
         </p>
-        <h2 className="mt-2 text-4xl font-semibold tracking-normal text-stone-950">
-          The quiet numbers
+        <h2 className="mt-2 text-3xl font-semibold tracking-normal text-stone-950">
+          Progress overview
         </h2>
-        <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
-          These numbers are calculated from your real habits and completion
-          history.
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
+          Based on your saved habits and completion history.
         </p>
       </section>
+
+      {!hasUsefulData ? (
+        <EmptyState
+          actionLabel="Track a habit"
+          actionTo="/habits"
+          title="Insights need a little more history"
+          message="Complete habits for a few days to unlock more useful weekly patterns."
+        />
+      ) : null}
 
       <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
@@ -71,9 +94,9 @@ function Statistics() {
         />
         <StatCard
           icon={FiTrendingUp}
-          label="Best streak"
+          label="Current streak"
           tone="amber"
-          value={`${dashboard?.longest_streak ?? 0}d`}
+          value={`${dashboard?.current_streak ?? 0}d`}
         />
         <StatCard
           icon={FiAward}
@@ -84,11 +107,11 @@ function Statistics() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-3xl border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5">
+        <div className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-6 shadow-sm shadow-stone-900/5">
           <h3 className="text-xl font-semibold text-stone-950">
             Weekly progress
           </h3>
-          <div className="mt-6 flex h-64 items-end gap-3">
+          <div className="mt-6 flex h-56 items-end gap-3">
             {weeklyProgress.map((day) => {
               const percent = day.total
                 ? Math.round((day.completed / day.total) * 100)
@@ -96,12 +119,15 @@ function Statistics() {
 
               return (
                 <div key={day.date || day.day} className="flex flex-1 flex-col items-center">
-                  <div className="flex h-48 w-full items-end rounded-t-3xl bg-stone-100">
+                  <div className="flex h-40 w-full items-end rounded-t-3xl bg-stone-100">
                     <div
-                      className="w-full rounded-t-3xl bg-[#8a5637]"
+                      className="w-full rounded-t-3xl bg-[#8a5637] transition-all duration-700"
                       style={{ height: `${percent}%` }}
                     />
                   </div>
+                  <p className="mt-2 text-xs font-semibold text-stone-700">
+                    {day.completed}/{day.total}
+                  </p>
                   <p className="mt-3 text-xs font-medium text-stone-500">
                     {day.day}
                   </p>
@@ -111,7 +137,7 @@ function Statistics() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5">
+        <div className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-6 shadow-sm shadow-stone-900/5">
           <h3 className="text-xl font-semibold text-stone-950">
             Category breakdown
           </h3>
@@ -143,7 +169,7 @@ function Statistics() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1fr_0.8fr]">
-        <div className="rounded-3xl border border-white/75 bg-white/65 p-6 shadow-xl shadow-stone-900/5">
+        <div className="rounded-[1.5rem] border border-white/75 bg-[#fffaf4]/78 p-6 shadow-sm shadow-stone-900/5">
           <h3 className="text-xl font-semibold text-stone-950">
             Habit performance
           </h3>
@@ -169,18 +195,24 @@ function Statistics() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-amber-100 bg-amber-50/80 p-6 shadow-xl shadow-stone-900/5">
-          <p className="text-sm font-medium uppercase tracking-[0.18em] text-amber-800/70">
-            Insight
-          </p>
-          <h3 className="mt-3 text-2xl font-semibold text-stone-950">
-            Your strongest habit is {mostConsistentHabit.title}.
-          </h3>
-          <p className="mt-3 text-sm leading-6 text-stone-600">
-            Use that routine as an anchor for the next small habit you add.
-          </p>
+        <aside className="space-y-3 rounded-[1.5rem] border border-amber-100 bg-amber-50/80 p-6 shadow-sm shadow-stone-900/5">
+          <h3 className="text-xl font-semibold text-stone-950">Insights</h3>
+          <Insight label="Strongest habit" value={mostConsistentHabit.title} />
+          <Insight label="Needs attention" value={mostMissedHabit.title} />
+          <Insight label="Best time of day" value={bestTimeOfDay} />
         </aside>
       </section>
+    </div>
+  )
+}
+
+function Insight({ label, value }) {
+  return (
+    <div className="rounded-2xl bg-white/70 px-4 py-3">
+      <p className="text-xs font-semibold uppercase tracking-[0.08em] text-amber-800/70">
+        {label}
+      </p>
+      <p className="mt-1 text-sm font-semibold text-stone-900">{value}</p>
     </div>
   )
 }

@@ -120,12 +120,23 @@ export function buildCalendarDays(habits = [], monthDate = new Date()) {
     const completedHabits = habits.filter((habit) =>
       habit.completionDates?.includes(isoDate),
     )
+    const totalHabits = habits.length
+    const completedCount = completedHabits.length
+    const isFuture = isoDate > todayIso
 
     cells.push({
       day,
       date: isoDate,
-      completed: completedHabits.length > 0,
-      missed: isoDate < todayIso && completedHabits.length === 0,
+      completed: totalHabits > 0 && completedCount === totalHabits,
+      completionRate: totalHabits
+        ? Math.round((completedCount / totalHabits) * 100)
+        : 0,
+      future: isFuture,
+      missed: totalHabits > 0 && isoDate < todayIso && completedCount === 0,
+      partial:
+        totalHabits > 0 &&
+        completedCount > 0 &&
+        completedCount < totalHabits,
       today: isoDate === todayIso,
       habits: completedHabits,
     })

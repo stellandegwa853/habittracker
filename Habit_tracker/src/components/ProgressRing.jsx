@@ -7,7 +7,7 @@ function ProgressRing({ label = 'Complete', size = 108, value = 0 }) {
       aria-label={`${label}: ${normalizedValue}%`}
     >
       <div
-        className="grid shrink-0 place-items-center rounded-full"
+        className="grid shrink-0 place-items-center rounded-full [transition:background_600ms_ease]"
         style={{
           width: size,
           height: size,
