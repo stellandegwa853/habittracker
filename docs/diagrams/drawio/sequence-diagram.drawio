@@ -1,0 +1,104 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-07-29T15:09:57.786156+00:00" agent="Codex" version="24.7.17" type="device">
+  <diagram id="page-106" name="Sequence Diagram">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2100" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="v-68" value="Sequence Diagram" style="text;html=1;strokeColor=none;fillColor=none;fontSize=34;fontStyle=1;fontColor=#1f1c19;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="35" width="720" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-69" value="Creating a habit, using the timer if needed, and saving completion" style="text;html=1;strokeColor=none;fillColor=none;fontSize=18;fontColor=#6f6760;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="60" y="82" width="900" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-70" value="User" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#ffffff;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=18;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="110" y="155" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-71" value="" style="shape=line;html=1;strokeColor=#d9cabe;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="225" y="215" width="1" height="980" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-72" value="React Frontend" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#ffffff;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=18;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="430" y="155" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-73" value="" style="shape=line;html=1;strokeColor=#d9cabe;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="545" y="215" width="1" height="980" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-74" value="AppDataProvider" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#ffffff;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=18;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="760" y="155" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-75" value="" style="shape=line;html=1;strokeColor=#d9cabe;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="875" y="215" width="1" height="980" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-76" value="API Service" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#ffffff;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=18;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="155" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-77" value="" style="shape=line;html=1;strokeColor=#d9cabe;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1205" y="215" width="1" height="980" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-78" value="Django Backend" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#ffffff;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=18;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="155" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-79" value="" style="shape=line;html=1;strokeColor=#d9cabe;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1535" y="215" width="1" height="980" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-80" value="Database" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#ffffff;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=18;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1750" y="155" width="230" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-81" value="" style="shape=line;html=1;strokeColor=#d9cabe;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1865" y="215" width="1" height="980" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-82" value="Open create habit page" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-70" target="v-72">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-83" value="Show habit form" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-72" target="v-70">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-84" value="Submit habit details" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-70" target="v-72">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-85" value="createHabitRecord(form)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-72" target="v-74">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-86" value="createHabit(payload)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-74" target="v-76">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-87" value="POST /api/habits/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-76" target="v-78">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-88" value="Save Habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-78" target="v-80">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-89" value="Habit saved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-80" target="v-78">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-90" value="Return created habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-78" target="v-76">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-91" value="Created habit data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-76" target="v-74">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-92" value="Refresh app data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-74" target="v-72">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-93" value="Complete habit or finish timer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-70" target="v-72">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-94" value="completeHabitRecord(id)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-72" target="v-74">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-95" value="completeHabit(id)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-74" target="v-76">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-96" value="POST /api/habits/{id}/complete/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-76" target="v-78">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-97" value="Save HabitCompletion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontSize=15;fontColor=#1f1c19;" edge="1" parent="1" source="v-78" target="v-80">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-98" value="For time-based habits, the countdown runs in the frontend. The final completion is saved through the same backend completion endpoint." style="text;html=1;strokeColor=none;fillColor=none;fontSize=17;fontStyle=0;fontColor=#1f1c19;align=left;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="170" y="1210" width="1550" height="45" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -83,9 +83,13 @@ NFR8: The system should perform basic checks through linting, build commands, an
 
 The four required diagrams are stored in `docs/diagrams/`.
 
+Editable draw.io versions are stored in `docs/diagrams/drawio/`. The easiest file to open is `docs/diagrams/drawio/vibecheck-diagrams.drawio`, which contains all four diagrams as separate pages. PNG preview versions are stored in `docs/diagrams/rendered/`.
+
 ### 4.1 Use Case Diagram
 
 File: [use-case-diagram.md](diagrams/use-case-diagram.md)
+
+Draw.io file: `docs/diagrams/drawio/use-case-diagram.drawio`
 
 This diagram shows the user interacting with registration, login, habit management, timer, dashboard, calendar, statistics, achievements, profile, and settings features.
 
@@ -93,17 +97,23 @@ This diagram shows the user interacting with registration, login, habit manageme
 
 File: [class-diagram.md](diagrams/class-diagram.md)
 
+Draw.io file: `docs/diagrams/drawio/class-diagram.drawio`
+
 This diagram shows the main real project classes and data structures, including `User`, `Habit`, `HabitCompletion`, `UserPreference`, serializers, backend views, the React data context, and API service functions.
 
 ### 4.3 Activity Diagram
 
 File: [activity-diagram.md](diagrams/activity-diagram.md)
 
+Draw.io file: `docs/diagrams/drawio/activity-diagram.drawio`
+
 This diagram shows the main user flow from opening the app, logging in or registering, creating a habit, choosing simple or time-based habit type, completing a habit, and viewing progress.
 
 ### 4.4 Sequence Diagram
 
 File: [sequence-diagram.md](diagrams/sequence-diagram.md)
+
+Draw.io file: `docs/diagrams/drawio/sequence-diagram.drawio`
 
 This diagram shows the create-and-complete habit flow between the user, React frontend, app data context, API service, Django backend, and database.
 

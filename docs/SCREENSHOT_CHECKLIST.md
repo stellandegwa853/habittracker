@@ -25,10 +25,10 @@ This file lists the screenshots still needed for a complete SWE3040XA presentati
 | Pull requests/code review | Missing if not used | Only show this if real PRs/reviews exist. |
 | Contributors | Missing | Capture GitHub contributors or terminal `git shortlog -sn --all`. |
 | Project management board/timeline | Partial | Use `PROJECT_TIMELINE.md` and `docs/PROJECT_MANAGEMENT_BOARD.md`; capture if needed. |
-| Use case diagram | Missing | Capture rendered `docs/diagrams/use-case-diagram.md`. |
-| Class diagram | Missing | Capture rendered `docs/diagrams/class-diagram.md`. |
-| Activity diagram | Missing | Capture rendered `docs/diagrams/activity-diagram.md`. |
-| Sequence diagram | Missing | Capture rendered `docs/diagrams/sequence-diagram.md`. |
+| Use case diagram | Ready | Use `docs/diagrams/drawio/use-case-diagram.drawio` or `docs/diagrams/rendered/use-case-diagram.png`. |
+| Class diagram | Ready | Use `docs/diagrams/drawio/class-diagram.drawio` or `docs/diagrams/rendered/class-diagram.png`. |
+| Activity diagram | Ready | Use `docs/diagrams/drawio/activity-diagram.drawio` or `docs/diagrams/rendered/activity-diagram.png`. |
+| Sequence diagram | Ready | Use `docs/diagrams/drawio/sequence-diagram.drawio` or `docs/diagrams/rendered/sequence-diagram.png`. |
 | `npm run build` passed | Existing | `presentation_screenshots/08_build_quality_testing.png`; update if needed. |
 | `npm run lint` passed | Existing | `presentation_screenshots/08_build_quality_testing.png`; update if needed. |
 | `python manage.py check` passed | Existing/needs update | Existing testing screenshot may show this; recapture after final docs if needed. |

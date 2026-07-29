@@ -52,4 +52,6 @@ The project can be explained as a steady build:
 - `docs/diagrams/class-diagram.md`
 - `docs/diagrams/activity-diagram.md`
 - `docs/diagrams/sequence-diagram.md`
+- `docs/diagrams/drawio/vibecheck-diagrams.drawio`
+- `docs/diagrams/rendered/`
 - `docs/CI_WORKFLOW_EXAMPLE.yml`
