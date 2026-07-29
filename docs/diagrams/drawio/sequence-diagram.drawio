@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mxfile host="app.diagrams.net" modified="2026-07-29T15:35:07.875301+00:00" agent="Codex" version="24.7.17" type="device">
+<mxfile host="app.diagrams.net" modified="2026-07-29T15:42:42.578726+00:00" agent="Codex" version="24.7.17" type="device">
   <diagram id="page-sequence" name="Sequence Diagram">
     <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1950" pageHeight="1650" background="#151515" math="0" shadow="0">
       <root>
@@ -17,170 +17,209 @@
         <mxCell id="sq-user" value="User" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=17;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="80" y="70" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-user-life" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=none;endFill=0;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="175.0" y="130" as="sourcePoint"/>
-            <mxPoint x="175.0" y="1580" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-user-life" value="" style="shape=line;html=1;strokeColor=#8a8a8a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="175.0" y="130" width="1" height="1450" as="geometry"/>
         </mxCell>
         <mxCell id="sq-front" value="React Frontend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=17;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="390" y="70" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-front-life" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=none;endFill=0;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485.0" y="130" as="sourcePoint"/>
-            <mxPoint x="485.0" y="1580" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-front-life" value="" style="shape=line;html=1;strokeColor=#8a8a8a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="485.0" y="130" width="1" height="1450" as="geometry"/>
         </mxCell>
         <mxCell id="sq-provider" value="AppDataProvider" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=17;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="760" y="70" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-provider-life" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=none;endFill=0;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="855.0" y="130" as="sourcePoint"/>
-            <mxPoint x="855.0" y="1580" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-provider-life" value="" style="shape=line;html=1;strokeColor=#8a8a8a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="855.0" y="130" width="1" height="1450" as="geometry"/>
         </mxCell>
         <mxCell id="sq-api" value="API Service" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=17;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="1085" y="70" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-api-life" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=none;endFill=0;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1180.0" y="130" as="sourcePoint"/>
-            <mxPoint x="1180.0" y="1580" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-api-life" value="" style="shape=line;html=1;strokeColor=#8a8a8a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1180.0" y="130" width="1" height="1450" as="geometry"/>
         </mxCell>
         <mxCell id="sq-backend" value="Django Backend" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=17;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="1405" y="70" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-backend-life" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=none;endFill=0;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1500.0" y="130" as="sourcePoint"/>
-            <mxPoint x="1500.0" y="1580" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-backend-life" value="" style="shape=line;html=1;strokeColor=#8a8a8a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1500.0" y="130" width="1" height="1450" as="geometry"/>
         </mxCell>
         <mxCell id="sq-db" value="Database" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=17;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="1690" y="70" width="190" height="60" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-db-life" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=none;endFill=0;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1785.0" y="130" as="sourcePoint"/>
-            <mxPoint x="1785.0" y="1580" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-db-life" value="" style="shape=line;html=1;strokeColor=#8a8a8a;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1785.0" y="130" width="1" height="1450" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-0" value="Open create habit page" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="175.0" y="170" as="sourcePoint"/>
-            <mxPoint x="485.0" y="170" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-0-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="172.0" y="167" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-1" value="Show habit form" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485.0" y="230" as="sourcePoint"/>
-            <mxPoint x="175.0" y="230" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-0-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="167" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-2" value="Submit habit details" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="175.0" y="290" as="sourcePoint"/>
-            <mxPoint x="485.0" y="290" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-msg-0" value="Open create habit page" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-0-s" target="sq-a-0-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-3" value="createHabitRecord(form)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485.0" y="380" as="sourcePoint"/>
-            <mxPoint x="855.0" y="380" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-1-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="227" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-4" value="createHabit(payload)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="855.0" y="460" as="sourcePoint"/>
-            <mxPoint x="1180.0" y="460" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-1-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="172.0" y="227" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-5" value="POST /api/habits/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1180.0" y="540" as="sourcePoint"/>
-            <mxPoint x="1500.0" y="540" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-msg-1" value="Show habit form" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-1-s" target="sq-a-1-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-6" value="Save Habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1500.0" y="620" as="sourcePoint"/>
-            <mxPoint x="1785.0" y="620" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-2-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="172.0" y="287" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-7" value="Habit saved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1785.0" y="690" as="sourcePoint"/>
-            <mxPoint x="1500.0" y="690" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-2-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="287" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-8" value="Return created habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1500.0" y="770" as="sourcePoint"/>
-            <mxPoint x="1180.0" y="770" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-msg-2" value="Submit habit details" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-2-s" target="sq-a-2-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-9" value="Created habit data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1180.0" y="850" as="sourcePoint"/>
-            <mxPoint x="855.0" y="850" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-3-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="377" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-10" value="Refresh habit list and dashboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="855.0" y="930" as="sourcePoint"/>
-            <mxPoint x="485.0" y="930" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-3-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="852.0" y="377" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-11" value="Show habit in habits page" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485.0" y="1010" as="sourcePoint"/>
-            <mxPoint x="175.0" y="1010" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-msg-3" value="createHabitRecord(form)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-3-s" target="sq-a-3-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-12" value="Complete habit or finish timer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="175.0" y="1110" as="sourcePoint"/>
-            <mxPoint x="485.0" y="1110" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-4-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="852.0" y="457" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-13" value="completeHabitRecord(habitId)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="485.0" y="1190" as="sourcePoint"/>
-            <mxPoint x="855.0" y="1190" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-4-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="457" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-14" value="completeHabit(habitId)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="855.0" y="1270" as="sourcePoint"/>
-            <mxPoint x="1180.0" y="1270" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-msg-4" value="createHabit(payload)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-4-s" target="sq-a-4-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-15" value="POST /api/habits/{id}/complete/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1180.0" y="1350" as="sourcePoint"/>
-            <mxPoint x="1500.0" y="1350" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-5-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="537" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-16" value="Save HabitCompletion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1500.0" y="1430" as="sourcePoint"/>
-            <mxPoint x="1785.0" y="1430" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-5-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="537" width="6" height="6" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-17" value="Completion saved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1785.0" y="1500" as="sourcePoint"/>
-            <mxPoint x="1500.0" y="1500" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-msg-5" value="POST /api/habits/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-5-s" target="sq-a-5-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="sq-msg-18" value="Return updated habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1500.0" y="1560" as="sourcePoint"/>
-            <mxPoint x="1180.0" y="1560" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="sq-a-6-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="617" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-6-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1782.0" y="617" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-6" value="Save Habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-6-s" target="sq-a-6-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-7-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1782.0" y="687" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-7-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="687" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-7" value="Habit saved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-7-s" target="sq-a-7-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-8-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="767" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-8-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="767" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-8" value="Return created habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-8-s" target="sq-a-8-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-9-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="847" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-9-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="852.0" y="847" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-9" value="Created habit data" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-9-s" target="sq-a-9-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-10-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="852.0" y="927" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-10-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="927" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-10" value="Refresh habit list and dashboard" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-10-s" target="sq-a-10-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-11-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="1007" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-11-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="172.0" y="1007" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-11" value="Show habit in habits page" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-11-s" target="sq-a-11-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-12-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="172.0" y="1107" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-12-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="1107" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-12" value="Complete habit or finish timer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-12-s" target="sq-a-12-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-13-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="482.0" y="1187" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-13-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="852.0" y="1187" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-13" value="completeHabitRecord(habitId)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-13-s" target="sq-a-13-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-14-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="852.0" y="1267" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-14-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="1267" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-14" value="completeHabit(habitId)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-14-s" target="sq-a-14-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-15-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="1347" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-15-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="1347" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-15" value="POST /api/habits/{id}/complete/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-15-s" target="sq-a-15-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-16-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="1427" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-16-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1782.0" y="1427" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-16" value="Save HabitCompletion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="sq-a-16-s" target="sq-a-16-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-17-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1782.0" y="1497" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-17-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="1497" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-17" value="Completion saved" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-17-s" target="sq-a-17-t">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-18-s" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1497.0" y="1557" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-a-18-t" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=none;opacity=0;resizable=0;movable=0;" vertex="1" parent="1">
+          <mxGeometry x="1177.0" y="1557" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="sq-msg-18" value="Return updated habit" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;dashed=1;" edge="1" parent="1" source="sq-a-18-s" target="sq-a-18-t">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="sq-note-simple" value="[simple habit: click Complete Today]" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontColor=#cfcfcf;align=left;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="115" y="1060" width="380" height="28" as="geometry"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mxfile host="app.diagrams.net" modified="2026-07-29T15:35:07.875301+00:00" agent="Codex" version="24.7.17" type="device">
+<mxfile host="app.diagrams.net" modified="2026-07-29T15:42:42.578726+00:00" agent="Codex" version="24.7.17" type="device">
   <diagram id="page-class" name="Class Diagram">
     <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="2200" background="#151515" math="0" shadow="0">
       <root>
@@ -44,34 +44,34 @@
         <mxCell id="cl-login" value="&lt;b&gt;EmailLoginSerializer&lt;/b&gt;&lt;hr&gt;&lt;hr&gt;+validate()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#303030;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=left;verticalAlign=middle;" vertex="1" parent="1">
           <mxGeometry x="410" y="730" width="300" height="150" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-provider" target="cl-api">
+        <mxCell id="cl-e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="cl-provider" target="cl-api">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-api" target="cl-list">
+        <mxCell id="cl-e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="cl-api" target="cl-list">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-list" target="cl-habitser">
+        <mxCell id="cl-e3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="cl-list" target="cl-habitser">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-habitser" target="cl-habit">
+        <mxCell id="cl-e4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="cl-habitser" target="cl-habit">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-reg" target="cl-user">
+        <mxCell id="cl-e5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.15;entryY=0;" edge="1" parent="1" source="cl-reg" target="cl-user">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-login" target="cl-user">
+        <mxCell id="cl-e6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.85;entryY=0;" edge="1" parent="1" source="cl-login" target="cl-user">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-user" target="cl-pref">
+        <mxCell id="cl-e7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.35;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="cl-user" target="cl-pref">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-user" target="cl-habit">
+        <mxCell id="cl-e8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=1;exitY=0.55;entryX=0;entryY=0.2;" edge="1" parent="1" source="cl-user" target="cl-habit">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-habit" target="cl-completion">
+        <mxCell id="cl-e9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" edge="1" parent="1" source="cl-habit" target="cl-completion">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="cl-e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1" source="cl-complete-view" target="cl-completion">
+        <mxCell id="cl-e10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="cl-complete-view" target="cl-completion">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="cl-m1" value="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=15;fontColor=#ffffff;align=left;verticalAlign=middle;" vertex="1" parent="1">

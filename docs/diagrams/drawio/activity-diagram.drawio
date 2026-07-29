@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mxfile host="app.diagrams.net" modified="2026-07-29T15:35:07.875301+00:00" agent="Codex" version="24.7.17" type="device">
+<mxfile host="app.diagrams.net" modified="2026-07-29T15:42:42.578726+00:00" agent="Codex" version="24.7.17" type="device">
   <diagram id="page-activity" name="Activity Diagram">
     <mxGraphModel dx="1600" dy="900" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="1250" background="#151515" math="0" shadow="0">
       <root>
@@ -41,59 +41,32 @@
         <mxCell id="ac-view" value="View calendar and statistics" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#51451d;strokeColor=#666666;strokeWidth=2;fontColor=#ffffff;fontSize=18;spacing=10;align=center;verticalAlign=middle;fontStyle=1;" vertex="1" parent="1">
           <mxGeometry x="345" y="1145" width="410" height="65" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="550" y="200" as="sourcePoint"/>
-            <mxPoint x="550" y="245" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-open" target="ac-login">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="550" y="315" as="sourcePoint"/>
-            <mxPoint x="550" y="360" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-login" target="ac-dash">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="550" y="430" as="sourcePoint"/>
-            <mxPoint x="550" y="475" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-dash" target="ac-choose">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="550" y="545" as="sourcePoint"/>
-            <mxPoint x="550" y="630" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-choose" target="ac-goal">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l5" value="Simple" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="410" y="685" as="sourcePoint"/>
-            <mxPoint x="305" y="830" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l5" value="Simple" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-goal" target="ac-simple">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l6" value="Time-based" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="690" y="685" as="sourcePoint"/>
-            <mxPoint x="805" y="830" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l6" value="Time-based" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-goal" target="ac-time">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="305" y="920" as="sourcePoint"/>
-            <mxPoint x="510" y="1010" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.3;entryY=0;" edge="1" parent="1" source="ac-simple" target="ac-save">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="805" y="920" as="sourcePoint"/>
-            <mxPoint x="590" y="1010" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.7;entryY=0;" edge="1" parent="1" source="ac-time" target="ac-save">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
-        <mxCell id="ac-l9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;" edge="1" parent="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="550" y="1095" as="sourcePoint"/>
-            <mxPoint x="550" y="1145" as="targetPoint"/>
-          </mxGeometry>
+        <mxCell id="ac-l9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#8a8a8a;strokeWidth=2;fontColor=#ffffff;fontSize=15;labelBackgroundColor=#151515;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ac-save" target="ac-view">
+          <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>
     </mxGraphModel>
