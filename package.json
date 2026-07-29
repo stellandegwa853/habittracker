@@ -1,0 +1,12 @@
+{
+  "name": "vibecheck-root",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix Habit_tracker run dev",
+    "frontend": "npm --prefix Habit_tracker run dev",
+    "build": "npm --prefix Habit_tracker run build",
+    "lint": "npm --prefix Habit_tracker run lint",
+    "install:frontend": "npm --prefix Habit_tracker install",
+    "backend": "python3 manage.py runserver 8000"
+  }
+}
