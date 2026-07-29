@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { FiEye, FiEyeOff } from 'react-icons/fi'
 import landingBackground from '../assets/landing_background.jpg'
 import { loginUser } from '../services/api'
 import { getApiErrorMessage } from '../utils/errorMessages'
@@ -15,6 +16,7 @@ function Login() {
   })
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   function handleChange(event) {
     const { checked, name, type, value } = event.target
@@ -95,16 +97,27 @@ function Login() {
               <span className="text-base font-medium text-white/85">
                 Password
               </span>
-              <input
-                id="login-password"
-                required
-                type="password"
-                name="password"
-                autoComplete="current-password"
-                value={form.password}
-                onChange={handleChange}
-                className="mt-2 w-full rounded-lg border border-white/30 bg-white/85 px-4 py-2.5 text-base text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-white focus:bg-white focus:ring-2 focus:ring-white/40"
-              />
+              <div className="relative mt-2">
+                <input
+                  id="login-password"
+                  required
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  autoComplete="current-password"
+                  value={form.password}
+                  onChange={handleChange}
+                  className="w-full rounded-lg border border-white/30 bg-white/85 px-4 py-2.5 pr-12 text-base text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-white focus:bg-white focus:ring-2 focus:ring-white/40"
+                />
+                <button
+                  type="button"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                  aria-pressed={showPassword}
+                  onClick={() => setShowPassword((current) => !current)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-stone-500 transition hover:bg-stone-200/70 hover:text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-500/30"
+                >
+                  {showPassword ? <FiEyeOff /> : <FiEye />}
+                </button>
+              </div>
             </label>
 
             <div className="flex flex-col gap-3 text-sm text-white/80 sm:flex-row sm:items-center sm:justify-between">

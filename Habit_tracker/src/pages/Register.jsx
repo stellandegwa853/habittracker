@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { FiEye, FiEyeOff } from 'react-icons/fi'
 import landingBackground from '../assets/landing_background.jpg'
 import { loginUser, registerUser } from '../services/api'
 import { getApiErrorMessage } from '../utils/errorMessages'
@@ -16,6 +17,7 @@ function Register() {
   })
   const [error, setError] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showPasswords, setShowPasswords] = useState(false)
 
   function handleChange(event) {
     const { name, value } = event.target
@@ -128,17 +130,27 @@ function Register() {
                 label="Password"
                 name="password"
                 autoComplete="new-password"
-                type="password"
+                type={showPasswords ? 'text' : 'password'}
                 value={form.password}
                 onChange={handleChange}
+                canTogglePassword
+                isPasswordVisible={showPasswords}
+                onTogglePassword={() =>
+                  setShowPasswords((current) => !current)
+                }
               />
               <FormField
                 label="Confirm Password"
                 name="confirm_password"
                 autoComplete="new-password"
-                type="password"
+                type={showPasswords ? 'text' : 'password'}
                 value={form.confirm_password}
                 onChange={handleChange}
+                canTogglePassword
+                isPasswordVisible={showPasswords}
+                onTogglePassword={() =>
+                  setShowPasswords((current) => !current)
+                }
               />
             </div>
 
@@ -175,21 +187,46 @@ function Register() {
   )
 }
 
-function FormField({ autoComplete, label, name, onChange, type, value }) {
+function FormField({
+  autoComplete,
+  canTogglePassword = false,
+  isPasswordVisible = false,
+  label,
+  name,
+  onChange,
+  onTogglePassword,
+  type,
+  value,
+}) {
   return (
     <label className="block">
       <span className="text-sm font-medium text-white/85 sm:text-base">
         {label}
       </span>
-      <input
-        required
-        type={type}
-        name={name}
-        autoComplete={autoComplete}
-        value={value}
-        onChange={onChange}
-        className="mt-1.5 w-full rounded-lg border border-white/30 bg-white/85 px-3 py-2 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-white focus:bg-white focus:ring-2 focus:ring-white/40 sm:px-4 sm:py-2.5 sm:text-base"
-      />
+      <div className="relative mt-1.5">
+        <input
+          required
+          type={type}
+          name={name}
+          autoComplete={autoComplete}
+          value={value}
+          onChange={onChange}
+          className="w-full rounded-lg border border-white/30 bg-white/85 px-3 py-2 pr-12 text-sm text-stone-900 outline-none transition placeholder:text-stone-400 focus:border-white focus:bg-white focus:ring-2 focus:ring-white/40 sm:px-4 sm:py-2.5 sm:text-base"
+        />
+        {canTogglePassword ? (
+          <button
+            type="button"
+            aria-label={
+              isPasswordVisible ? 'Hide passwords' : 'Show passwords'
+            }
+            aria-pressed={isPasswordVisible}
+            onClick={onTogglePassword}
+            className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-stone-500 transition hover:bg-stone-200/70 hover:text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-500/30"
+          >
+            {isPasswordVisible ? <FiEyeOff /> : <FiEye />}
+          </button>
+        ) : null}
+      </div>
     </label>
   )
 }
