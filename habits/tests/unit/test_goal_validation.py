@@ -1,15 +1,15 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from .models import Habit
-from .serializers import HabitSerializer
+from habits.models import Habit
+from habits.serializers import HabitSerializer
 
 
 class HabitGoalValidationTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username="william",
-            password="test-password"
+            password="test-password",
         )
 
     def test_time_based_goal_requires_duration(self):
