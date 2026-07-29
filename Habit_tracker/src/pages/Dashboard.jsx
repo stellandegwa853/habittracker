@@ -1,10 +1,13 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   FiActivity,
   FiCheckCircle,
+  FiPlus,
   FiRefreshCw,
   FiTrendingUp,
 } from 'react-icons/fi'
+import EmptyState from '../components/EmptyState'
 import HabitCard from '../components/HabitCard'
 import ProgressRing from '../components/ProgressRing'
 import StatCard from '../components/StatCard'
@@ -24,11 +27,23 @@ function Dashboard() {
   const [selectedMood, setSelectedMood] = useState('Calm')
 
   if (isLoading) {
-    return <StateCard message="Loading your VibeCheck dashboard..." />
+    return (
+      <EmptyState
+        title="Loading dashboard"
+        message="Getting your habits, streaks, and today's progress ready."
+      />
+    )
   }
 
   if (error) {
-    return <StateCard message={error} />
+    return (
+      <EmptyState
+        icon="!"
+        title="Could not load dashboard"
+        message={error}
+        tone="warning"
+      />
+    )
   }
 
   const completedToday =
@@ -55,6 +70,21 @@ function Dashboard() {
             Small steps today. Better habits tomorrow. You do not need a perfect
             day, just one honest check-in.
           </p>
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Link
+              to="/habits/create"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-[#8a5637]/15 transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
+            >
+              <FiPlus />
+              Create Habit
+            </Link>
+            <Link
+              to="/habits"
+              className="inline-flex items-center justify-center rounded-full border border-stone-200 bg-white/75 px-5 py-3 text-sm font-semibold text-stone-700 transition hover:border-stone-300 hover:bg-white hover:text-stone-950 focus:outline-none focus:ring-2 focus:ring-stone-300"
+            >
+              View Habits
+            </Link>
+          </div>
         </div>
 
         <div className="rounded-[2rem] border border-white/75 bg-[#8a5637] p-6 text-white shadow-xl shadow-[#8a5637]/20">
@@ -73,9 +103,17 @@ function Dashboard() {
               </div>
             </>
           ) : (
-            <p className="mt-4 text-sm leading-6 text-white/75">
-              Create your first habit to choose a focus for today.
-            </p>
+            <>
+              <p className="mt-4 text-sm leading-6 text-white/75">
+                Create your first habit and it will become today&apos;s focus.
+              </p>
+              <Link
+                to="/habits/create"
+                className="mt-6 inline-flex rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#744326]"
+              >
+                Start a habit
+              </Link>
+            </>
           )}
         </div>
       </section>
@@ -184,6 +222,12 @@ function Dashboard() {
               Mark what you can. Let the rest wait its turn.
             </p>
           </div>
+          <Link
+            to="/habits/create"
+            className="hidden rounded-full border border-stone-200 bg-white/75 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:bg-white sm:inline-flex"
+          >
+            Add Habit
+          </Link>
         </div>
         {todayHabits.length ? (
           <div className="grid gap-4 xl:grid-cols-2">
@@ -196,7 +240,12 @@ function Dashboard() {
             ))}
           </div>
         ) : (
-          <StateCard message="No habits yet. Create one to start your rhythm." />
+          <EmptyState
+            actionLabel="Create your first habit"
+            actionTo="/habits/create"
+            title="No habits yet"
+            message="Start with one small habit. After that, your dashboard will show progress and streaks here."
+          />
         )}
       </section>
 
@@ -209,14 +258,6 @@ function Dashboard() {
         </p>
       </section>
     </div>
-  )
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5 backdrop-blur">
-      {message}
-    </section>
   )
 }
 

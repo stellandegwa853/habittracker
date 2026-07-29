@@ -1,14 +1,34 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import HabitForm from '../components/HabitForm'
 import { useAppData } from '../context/useAppData'
+import { getApiErrorMessage } from '../utils/errorMessages'
 
 function CreateHabit() {
   const navigate = useNavigate()
   const { createHabitRecord } = useAppData()
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   async function handleSubmit(form) {
-    await createHabitRecord(form)
-    navigate('/habits')
+    setError('')
+    setIsSubmitting(true)
+
+    try {
+      await createHabitRecord(form)
+      navigate('/habits', {
+        state: { notice: 'Habit created. You can mark it complete today.' },
+      })
+    } catch (requestError) {
+      setError(
+        getApiErrorMessage(
+          requestError,
+          'Could not create that habit. Please check the form.',
+        ),
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -24,7 +44,12 @@ function CreateHabit() {
         </p>
       </section>
 
-      <HabitForm onSubmit={handleSubmit} submitLabel="Save Habit" />
+      <HabitForm
+        error={error}
+        isSubmitting={isSubmitting}
+        onSubmit={handleSubmit}
+        submitLabel="Save Habit"
+      />
     </div>
   )
 }

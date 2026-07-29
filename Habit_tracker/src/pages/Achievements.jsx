@@ -1,4 +1,5 @@
 import BadgeCard from '../components/BadgeCard'
+import EmptyState from '../components/EmptyState'
 import ProgressRing from '../components/ProgressRing'
 import { useAppData } from '../context/useAppData'
 
@@ -56,7 +57,12 @@ function Achievements() {
   const earnedCount = achievements.filter((badge) => badge.earned).length
 
   if (isLoading) {
-    return <StateCard message="Loading achievements..." />
+    return (
+      <EmptyState
+        title="Loading achievements"
+        message="Checking which badges your habits have unlocked."
+      />
+    )
   }
 
   return (
@@ -86,14 +92,6 @@ function Achievements() {
         ))}
       </section>
     </div>
-  )
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5">
-      {message}
-    </section>
   )
 }
 

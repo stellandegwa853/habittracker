@@ -1,4 +1,5 @@
 import { FiAward, FiCheckCircle, FiTarget, FiTrendingUp } from 'react-icons/fi'
+import EmptyState from '../components/EmptyState'
 import StatCard from '../components/StatCard'
 import { useAppData } from '../context/useAppData'
 
@@ -33,7 +34,12 @@ function Statistics() {
   }, [])
 
   if (isLoading) {
-    return <StateCard message="Loading statistics..." />
+    return (
+      <EmptyState
+        title="Loading statistics"
+        message="Crunching your habit progress from the backend."
+      />
+    )
   }
 
   return (
@@ -142,7 +148,7 @@ function Statistics() {
             Habit performance
           </h3>
           <div className="mt-5 space-y-3">
-            {habits.map((habit) => (
+            {habits.length ? habits.map((habit) => (
               <div
                 key={habit.id}
                 className="flex items-center justify-between rounded-2xl bg-white/75 px-4 py-3"
@@ -155,7 +161,11 @@ function Statistics() {
                   {habit.completionRate}%
                 </span>
               </div>
-            ))}
+            )) : (
+              <p className="rounded-2xl bg-stone-50 px-4 py-4 text-sm text-stone-500">
+                Create habits to compare performance here.
+              </p>
+            )}
           </div>
         </div>
 
@@ -172,14 +182,6 @@ function Statistics() {
         </aside>
       </section>
     </div>
-  )
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5">
-      {message}
-    </section>
   )
 }
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import landingBackground from '../assets/landing_background.jpg'
 import { loginUser, registerUser } from '../services/api'
+import { getApiErrorMessage } from '../utils/errorMessages'
 
 function Register() {
   const navigate = useNavigate()
@@ -19,25 +20,6 @@ function Register() {
   function handleChange(event) {
     const { name, value } = event.target
     setForm((currentForm) => ({ ...currentForm, [name]: value }))
-  }
-
-  function getErrorMessage(requestError) {
-    const responseData = requestError.response?.data
-
-    if (!responseData) {
-      return 'Could not create your account. Please try again.'
-    }
-
-    if (typeof responseData === 'string') {
-      return responseData
-    }
-
-    return (
-      responseData.detail ||
-      responseData.non_field_errors?.[0] ||
-      Object.values(responseData).flat()[0] ||
-      'Could not create your account. Please try again.'
-    )
   }
 
   async function handleSubmit(event) {
@@ -65,7 +47,12 @@ function Register() {
       })
       navigate('/dashboard', { replace: true })
     } catch (requestError) {
-      setError(getErrorMessage(requestError))
+      setError(
+        getApiErrorMessage(
+          requestError,
+          'Could not create your account. Please try again.',
+        ),
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -73,16 +60,19 @@ function Register() {
 
   return (
     <main
-      className="relative h-dvh overflow-hidden bg-stone-950 bg-cover bg-center text-white"
+      className="relative min-h-dvh overflow-y-auto bg-stone-950 bg-cover bg-center text-white"
       style={{ backgroundImage: `url(${landingBackground})` }}
     >
-      <section className="flex h-full items-center justify-center px-4 py-3 sm:px-8 lg:justify-end lg:px-16 xl:px-24">
-        <div className="w-full max-w-2xl rounded-[28px] border border-white/25 bg-white/15 px-5 py-5 shadow-2xl shadow-black/25 backdrop-blur-md sm:px-9 sm:py-7 lg:mr-6 xl:mr-12">
+      <section className="flex min-h-dvh items-center justify-center px-4 py-6 sm:px-8 lg:justify-end lg:px-16 xl:px-24">
+        <div className="w-full max-w-2xl rounded-[28px] border border-white/25 bg-stone-950/25 px-5 py-5 shadow-2xl shadow-black/25 backdrop-blur-md sm:px-9 sm:py-7 lg:mr-6 xl:mr-12">
           <Link
             to="/"
-            className="text-sm font-medium tracking-[0.18em] text-white/80 transition hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-semibold tracking-[0.14em] text-white/85 transition hover:text-white"
           >
-            VibeCheck
+            <span className="grid h-7 w-7 place-items-center rounded-full border border-white/25 bg-white/15 text-xs">
+              ✓
+            </span>
+            <span>VibeCheck</span>
           </Link>
 
           <div className="mt-5 sm:mt-7">
@@ -95,7 +85,7 @@ function Register() {
           </div>
 
           <form className="mt-5 space-y-4 sm:mt-6" onSubmit={handleSubmit}>
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
               <FormField
                 label="First Name"
                 name="first_name"
@@ -114,7 +104,7 @@ function Register() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
               <FormField
                 label="Username"
                 name="username"
@@ -133,7 +123,7 @@ function Register() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
               <FormField
                 label="Password"
                 name="password"
@@ -153,7 +143,10 @@ function Register() {
             </div>
 
             {error ? (
-              <p className="rounded-lg border border-red-100/30 bg-red-950/45 px-4 py-2 text-sm text-red-50">
+              <p
+                role="alert"
+                className="rounded-2xl border border-red-100/30 bg-red-950/45 px-4 py-3 text-sm text-red-50"
+              >
                 {error}
               </p>
             ) : null}
@@ -161,9 +154,9 @@ function Register() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-lg bg-amber-800/90 px-6 py-2.5 text-base font-medium text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45 disabled:cursor-not-allowed disabled:bg-stone-500/80"
+              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-full bg-amber-800/95 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45 disabled:cursor-not-allowed disabled:bg-stone-500/80"
             >
-              {isSubmitting ? 'Creating account...' : 'Register'}
+              {isSubmitting ? 'Creating account...' : 'Create account'}
             </button>
           </form>
 

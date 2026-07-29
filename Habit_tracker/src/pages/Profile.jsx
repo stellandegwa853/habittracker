@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import EmptyState from '../components/EmptyState'
 import { useAppData } from '../context/useAppData'
 
 function Profile() {
@@ -30,7 +31,12 @@ function Profile() {
   }, [profile])
 
   if (isLoading) {
-    return <StateCard message="Loading profile..." />
+    return (
+      <EmptyState
+        title="Loading profile"
+        message="Getting your account details and habit summary."
+      />
+    )
   }
 
   function handleChange(event) {
@@ -149,14 +155,6 @@ function Field({ label, name, onChange, type = 'text', value }) {
         className="mt-2 w-full rounded-2xl border border-stone-200 bg-white/80 px-4 py-3 text-sm text-stone-900 outline-none focus:border-[#8a5637]/40 focus:ring-2 focus:ring-[#8a5637]/15"
       />
     </label>
-  )
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5">
-      {message}
-    </section>
   )
 }
 

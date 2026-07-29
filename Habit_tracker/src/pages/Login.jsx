@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import landingBackground from '../assets/landing_background.jpg'
 import { loginUser } from '../services/api'
+import { getApiErrorMessage } from '../utils/errorMessages'
 
 function Login() {
   const navigate = useNavigate()
@@ -35,13 +36,11 @@ function Login() {
       })
       navigate(redirectTo, { replace: true })
     } catch (requestError) {
-      const responseData = requestError.response?.data
-
       setError(
-        responseData?.detail ||
-          responseData?.non_field_errors?.[0] ||
-          Object.values(responseData || {}).flat()[0] ||
+        getApiErrorMessage(
+          requestError,
           'Could not log in. Please check your email and password.',
+        ),
       )
     } finally {
       setIsSubmitting(false)
@@ -50,19 +49,22 @@ function Login() {
 
   return (
     <main
-      className="relative h-dvh overflow-hidden bg-stone-950 bg-cover bg-center text-white"
+      className="relative min-h-dvh overflow-y-auto bg-stone-950 bg-cover bg-center text-white"
       style={{ backgroundImage: `url(${landingBackground})` }}
     >
-      <section className="flex h-full items-center justify-center px-4 py-4 sm:px-8 lg:justify-end lg:px-16 xl:px-24">
-        <div className="w-full max-w-2xl rounded-[28px] border border-white/25 bg-white/15 px-5 py-6 shadow-2xl shadow-black/25 backdrop-blur-md sm:px-9 sm:py-8 lg:mr-6 xl:mr-12">
+      <section className="flex min-h-dvh items-center justify-center px-4 py-6 sm:px-8 lg:justify-end lg:px-16 xl:px-24">
+        <div className="w-full max-w-xl rounded-[28px] border border-white/25 bg-stone-950/25 px-5 py-6 shadow-2xl shadow-black/25 backdrop-blur-md sm:px-9 sm:py-8 lg:mr-6 xl:mr-12">
           <Link
             to="/"
-            className="text-sm font-medium tracking-[0.18em] text-white/80 transition hover:text-white"
+            className="inline-flex items-center gap-2 text-sm font-semibold tracking-[0.14em] text-white/85 transition hover:text-white"
           >
-            VibeCheck
+            <span className="grid h-7 w-7 place-items-center rounded-full border border-white/25 bg-white/15 text-xs">
+              ✓
+            </span>
+            <span>VibeCheck</span>
           </Link>
 
-          <div className="mt-10 sm:mt-14">
+          <div className="mt-9 sm:mt-12">
             <h1 className="text-4xl font-semibold tracking-normal text-white sm:text-5xl">
               Login
             </h1>
@@ -78,6 +80,7 @@ function Login() {
             <label className="block">
               <span className="text-base font-medium text-white/85">Email</span>
               <input
+                id="login-email"
                 required
                 type="email"
                 name="email"
@@ -93,6 +96,7 @@ function Login() {
                 Password
               </span>
               <input
+                id="login-password"
                 required
                 type="password"
                 name="password"
@@ -124,7 +128,10 @@ function Login() {
             </div>
 
             {error ? (
-              <p className="rounded-lg border border-red-100/30 bg-red-950/45 px-4 py-2 text-sm text-red-50">
+              <p
+                role="alert"
+                className="rounded-2xl border border-red-100/30 bg-red-950/45 px-4 py-3 text-sm text-red-50"
+              >
                 {error}
               </p>
             ) : null}
@@ -132,9 +139,9 @@ function Login() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-lg bg-amber-800/90 px-6 py-2.5 text-base font-medium text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45 disabled:cursor-not-allowed disabled:bg-stone-500/80"
+              className="mx-auto flex w-full max-w-sm items-center justify-center rounded-full bg-amber-800/95 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-amber-900 focus:outline-none focus:ring-2 focus:ring-white/45 disabled:cursor-not-allowed disabled:bg-stone-500/80"
             >
-              {isSubmitting ? 'Logging in...' : 'Login'}
+              {isSubmitting ? 'Logging in...' : 'Login to dashboard'}
             </button>
           </form>
 

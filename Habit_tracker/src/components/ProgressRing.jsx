@@ -2,7 +2,10 @@ function ProgressRing({ label = 'Complete', size = 108, value = 0 }) {
   const normalizedValue = Math.max(0, Math.min(100, value))
 
   return (
-    <div className="flex items-center gap-4">
+    <div
+      className="flex flex-col gap-4 sm:flex-row sm:items-center"
+      aria-label={`${label}: ${normalizedValue}%`}
+    >
       <div
         className="grid shrink-0 place-items-center rounded-full"
         style={{
@@ -17,8 +20,8 @@ function ProgressRing({ label = 'Complete', size = 108, value = 0 }) {
           </span>
         </div>
       </div>
-      <div>
-        <p className="text-sm font-medium text-stone-500">{label}</p>
+      <div className="min-w-0">
+        <p className="text-sm font-semibold text-stone-600">{label}</p>
         <p className="mt-1 text-sm leading-6 text-stone-600">
           Keep the chain alive with one small check-in.
         </p>

@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import { useLocation } from 'react-router-dom'
-import { FiSearch } from 'react-icons/fi'
+import { Link, useLocation } from 'react-router-dom'
+import { FiPlus } from 'react-icons/fi'
 import { useAppData } from '../context/useAppData'
 
 const pageTitles = {
@@ -58,14 +58,13 @@ function Topbar() {
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-          <label className="flex min-w-0 items-center gap-2 rounded-full border border-stone-200/70 bg-white/75 px-4 py-2.5 text-sm text-stone-500 shadow-sm">
-            <FiSearch className="shrink-0" />
-            <input
-              type="search"
-              placeholder="Quick search"
-              className="w-full bg-transparent text-stone-800 outline-none placeholder:text-stone-400 sm:w-36 lg:w-44"
-            />
-          </label>
+          <Link
+            to="/habits/create"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#8a5637] px-4 py-2.5 text-sm font-semibold text-white shadow-sm shadow-[#8a5637]/15 transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30"
+          >
+            <FiPlus />
+            New Habit
+          </Link>
 
           <div className="flex items-center justify-between gap-3 rounded-full border border-stone-200/70 bg-white/75 px-3 py-2 shadow-sm sm:justify-start">
             <span className="text-sm font-medium text-stone-600">{dateLabel}</span>

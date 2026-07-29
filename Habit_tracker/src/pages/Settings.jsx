@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import EmptyState from '../components/EmptyState'
 import { useAppData } from '../context/useAppData'
 import { changePassword } from '../services/api'
 
@@ -34,7 +35,12 @@ function Settings() {
   }, [preferences])
 
   if (isLoading) {
-    return <StateCard message="Loading settings..." />
+    return (
+      <EmptyState
+        title="Loading settings"
+        message="Getting your account preferences from Django."
+      />
+    )
   }
 
   function updateForm(nextValues) {
@@ -245,14 +251,6 @@ function Toggle({ checked, label, onClick }) {
         <span className="h-5 w-5 rounded-full bg-white shadow-sm" />
       </span>
     </button>
-  )
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5">
-      {message}
-    </section>
   )
 }
 

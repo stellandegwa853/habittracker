@@ -25,6 +25,19 @@ body {
   margin: 0;
 }
 
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(138, 86, 55, 0.22);
+  color: #1c1917;
+}
+
 #root {
   min-height: 100vh;
 }

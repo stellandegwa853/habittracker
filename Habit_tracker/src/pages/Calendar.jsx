@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import CalendarGrid from '../components/CalendarGrid'
+import EmptyState from '../components/EmptyState'
 import { useAppData } from '../context/useAppData'
 import { buildCalendarDays, getTodayDate } from '../utils/habitTransforms'
 
@@ -25,7 +26,10 @@ function Calendar() {
 
       <section className="grid gap-6 xl:grid-cols-[1.25fr_0.75fr]">
         {isLoading ? (
-          <StateCard message="Loading calendar..." />
+          <EmptyState
+            title="Loading calendar"
+            message="Building your month view from saved habit completions."
+          />
         ) : (
           <CalendarGrid
             days={days}
@@ -76,14 +80,6 @@ function Calendar() {
 
 function Legend({ color, label }) {
   return <span className={`rounded-full px-3 py-1 ${color}`}>{label}</span>
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-3xl border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5">
-      {message}
-    </section>
-  )
 }
 
 export default Calendar

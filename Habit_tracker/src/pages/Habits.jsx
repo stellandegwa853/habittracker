@@ -1,8 +1,10 @@
-import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FiPlus, FiSearch } from 'react-icons/fi'
+import EmptyState from '../components/EmptyState'
 import HabitCard from '../components/HabitCard'
 import { useAppData } from '../context/useAppData'
+import { getApiErrorMessage } from '../utils/errorMessages'
 import { categories } from '../utils/mockData'
 
 function Habits() {
@@ -13,9 +15,17 @@ function Habits() {
     habits,
     isLoading,
   } = useAppData()
+  const location = useLocation()
+  const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
-  const [notice, setNotice] = useState('')
+  const [notice, setNotice] = useState(location.state?.notice || '')
+
+  useEffect(() => {
+    if (location.state?.notice) {
+      navigate(location.pathname, { replace: true, state: {} })
+    }
+  }, [location.pathname, location.state?.notice, navigate])
 
   const filteredHabits = useMemo(() => {
     return habits.filter((habit) => {
@@ -29,16 +39,35 @@ function Habits() {
   }, [category, habits, query])
 
   async function handleDelete(habitId) {
-    await deleteHabitRecord(habitId)
-    setNotice('Habit deleted.')
+    const shouldDelete = window.confirm(
+      'Delete this habit? This will remove it from your account.',
+    )
+
+    if (!shouldDelete) {
+      return
+    }
+
+    try {
+      await deleteHabitRecord(habitId)
+      setNotice('Habit deleted.')
+    } catch (requestError) {
+      setNotice(
+        getApiErrorMessage(requestError, 'Could not delete that habit.'),
+      )
+    }
   }
 
   async function handleMarkDone(habitId) {
     try {
       await completeHabitRecord(habitId)
-      setNotice('Habit marked done.')
-    } catch {
-      setNotice('That habit is already complete today.')
+      setNotice('Habit marked complete.')
+    } catch (requestError) {
+      setNotice(
+        getApiErrorMessage(
+          requestError,
+          'That habit could not be marked complete.',
+        ),
+      )
     }
   }
 
@@ -51,8 +80,18 @@ function Habits() {
             Keep the chain alive
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-stone-600">
-            Your real habits from Django, filtered gently on the frontend.
+            Your saved habits from Django. Search, complete, edit, or create a
+            new rhythm from here.
           </p>
+          <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-stone-600">
+            <span className="rounded-full bg-white/70 px-3 py-1">
+              {habits.length} total
+            </span>
+            <span className="rounded-full bg-emerald-50 px-3 py-1 text-emerald-800">
+              {habits.filter((habit) => habit.completedToday).length} complete
+              today
+            </span>
+          </div>
         </div>
         <Link
           to="/habits/create"
@@ -96,13 +135,23 @@ function Habits() {
       </section>
 
       {error || notice ? (
-        <p className="rounded-2xl border border-white/75 bg-white/65 px-4 py-3 text-sm text-stone-600 shadow-sm">
+        <p
+          role={error ? 'alert' : 'status'}
+          className={`rounded-2xl border px-4 py-3 text-sm shadow-sm ${
+            error
+              ? 'border-red-100 bg-red-50 text-red-700'
+              : 'border-emerald-100 bg-emerald-50 text-emerald-700'
+          }`}
+        >
           {error || notice}
         </p>
       ) : null}
 
       {isLoading ? (
-        <StateCard message="Loading habits..." />
+        <EmptyState
+          title="Loading habits"
+          message="Pulling your saved habits from the Django backend."
+        />
       ) : filteredHabits.length ? (
         <section className="grid gap-4 xl:grid-cols-2">
           {filteredHabits.map((habit) => (
@@ -115,17 +164,18 @@ function Habits() {
           ))}
         </section>
       ) : (
-        <StateCard message="No habits found. Add one to start the chain." />
+        <EmptyState
+          actionLabel={habits.length ? 'Create another habit' : 'Create your first habit'}
+          actionTo="/habits/create"
+          title={habits.length ? 'No matching habits' : 'No habits yet'}
+          message={
+            habits.length
+              ? 'Try a different search or category, or create a new habit if this one is missing.'
+              : 'Start with one small habit. You can always edit it later.'
+          }
+        />
       )}
     </div>
-  )
-}
-
-function StateCard({ message }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center text-stone-600 shadow-xl shadow-stone-900/5 backdrop-blur">
-      {message}
-    </section>
   )
 }
 

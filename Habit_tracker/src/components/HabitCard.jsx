@@ -9,6 +9,9 @@ function HabitCard({ habit, onDelete, onMarkDone, showActions = true }) {
 
   const currentStreak = formatDays(habit.currentStreak)
   const bestStreak = formatDays(habit.bestStreak)
+  const completionButtonLabel = habit.completedToday
+    ? 'Completed'
+    : 'Mark Complete'
 
   return (
     <article className="group overflow-hidden rounded-[1.4rem] border border-white/75 bg-[#fffaf4]/78 shadow-sm shadow-stone-900/5 backdrop-blur transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-stone-900/8">
@@ -61,12 +64,21 @@ function HabitCard({ habit, onDelete, onMarkDone, showActions = true }) {
 
           {showActions ? (
             <div className="flex flex-wrap items-center gap-2 border-t border-stone-200/60 pt-4">
+              <button
+                type="button"
+                disabled={habit.completedToday}
+                onClick={() => onMarkDone?.(habit.id)}
+                className="inline-flex items-center gap-2 rounded-full bg-[#8a5637] px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-[#8a5637]/20 transition hover:bg-[#744326] focus:outline-none focus:ring-2 focus:ring-[#8a5637]/30 disabled:cursor-not-allowed disabled:bg-emerald-100 disabled:text-emerald-800 disabled:shadow-none"
+              >
+                <FiCheck />
+                {completionButtonLabel}
+              </button>
               <Link
                 to={`/habits/${habit.id}`}
                 className="inline-flex items-center gap-2 rounded-full border border-stone-200/80 bg-white/75 px-4 py-2 text-sm font-medium text-stone-700 transition hover:border-stone-300 hover:bg-white hover:text-stone-950"
               >
                 <FiEye />
-                View
+                View Progress
               </Link>
               <Link
                 to={`/habits/${habit.id}/edit`}
@@ -82,14 +94,6 @@ function HabitCard({ habit, onDelete, onMarkDone, showActions = true }) {
               >
                 <FiTrash2 />
                 Delete
-              </button>
-              <button
-                type="button"
-                onClick={() => onMarkDone?.(habit.id)}
-                className="inline-flex items-center gap-2 rounded-full bg-[#8a5637] px-4 py-2 text-sm font-medium text-white shadow-sm shadow-[#8a5637]/20 transition hover:bg-[#744326]"
-              >
-                <FiCheck />
-                Mark Done
               </button>
             </div>
           ) : null}

@@ -1,28 +1,56 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import EmptyState from '../components/EmptyState'
 import HabitForm from '../components/HabitForm'
 import { useAppData } from '../context/useAppData'
+import { getApiErrorMessage } from '../utils/errorMessages'
 import { toHabitFormValues } from '../utils/habitTransforms'
 
 function EditHabit() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { habits, isLoading, updateHabitRecord } = useAppData()
+  const [error, setError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const habit = habits.find((item) => String(item.id) === id)
 
   async function handleSubmit(form) {
-    await updateHabitRecord(id, form)
-    navigate(`/habits/${habit.id}`)
+    setError('')
+    setIsSubmitting(true)
+
+    try {
+      await updateHabitRecord(id, form)
+      navigate(`/habits/${habit.id}`, {
+        state: { notice: 'Habit updated.' },
+      })
+    } catch (requestError) {
+      setError(
+        getApiErrorMessage(
+          requestError,
+          'Could not update that habit. Please check the form.',
+        ),
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isLoading) {
-    return <EmptyState title="Loading habit" message="Finding that rhythm..." />
+    return (
+      <EmptyState
+        title="Loading habit"
+        message="Finding that rhythm before opening the edit form."
+      />
+    )
   }
 
   if (!habit) {
     return (
       <EmptyState
+        actionLabel="Back to habits"
+        actionTo="/habits"
         title="Habit not found"
-        message="That habit is not in the mock list."
+        message="That habit is not in your saved list."
       />
     )
   }
@@ -40,26 +68,13 @@ function EditHabit() {
       </section>
 
       <HabitForm
+        error={error}
         initialValues={toHabitFormValues(habit)}
+        isSubmitting={isSubmitting}
         onSubmit={handleSubmit}
         submitLabel="Update Habit"
       />
     </div>
-  )
-}
-
-function EmptyState({ message, title }) {
-  return (
-    <section className="rounded-[2rem] border border-white/75 bg-white/65 p-8 text-center shadow-xl shadow-stone-900/5">
-      <h2 className="text-3xl font-semibold text-stone-950">{title}</h2>
-      <p className="mt-3 text-stone-600">{message}</p>
-      <Link
-        to="/habits"
-        className="mt-6 inline-flex rounded-full bg-[#8a5637] px-5 py-3 text-sm font-medium text-white"
-      >
-        Back to habits
-      </Link>
-    </section>
   )
 }
 

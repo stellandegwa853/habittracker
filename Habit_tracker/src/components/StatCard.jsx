@@ -11,7 +11,7 @@ function StatCard({ helper, icon: Icon, label, tone = 'coffee', value }) {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-sm font-medium text-stone-500">{label}</p>
-          <p className="mt-2 text-3xl font-semibold tracking-normal text-stone-950">
+          <p className="mt-2 break-words text-3xl font-semibold tracking-normal text-stone-950">
             {value}
           </p>
         </div>
