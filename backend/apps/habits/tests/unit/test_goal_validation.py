@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from habits.models import Habit
-from habits.serializers import HabitSerializer
+from apps.habits.models import Habit
+from apps.habits.serializers import HabitSerializer
 
 
 class HabitGoalValidationTests(TestCase):

@@ -20,10 +20,10 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: Habit_tracker/package-lock.json
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install frontend dependencies
-        run: npm ci --prefix Habit_tracker
+        run: npm ci --prefix frontend
 
       - name: Run frontend lint
         run: npm run lint
@@ -46,10 +46,12 @@ jobs:
           cache: pip
 
       - name: Install backend dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r backend/requirements.txt
 
       - name: Run Django system check
+        working-directory: backend
         run: python manage.py check
 
       - name: Run Django tests
+        working-directory: backend
         run: python manage.py test

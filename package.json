@@ -2,11 +2,14 @@
   "name": "vibecheck-root",
   "private": true,
   "scripts": {
-    "dev": "npm --prefix Habit_tracker run dev",
-    "frontend": "npm --prefix Habit_tracker run dev",
-    "build": "npm --prefix Habit_tracker run build",
-    "lint": "npm --prefix Habit_tracker run lint",
-    "install:frontend": "npm --prefix Habit_tracker install",
-    "backend": "python3 manage.py runserver 8000"
+    "dev": "npm --prefix frontend run dev",
+    "frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "lint": "npm --prefix frontend run lint",
+    "install:frontend": "npm --prefix frontend install",
+    "backend": "cd backend && ../.venv/bin/python manage.py runserver 8000",
+    "backend:check": "cd backend && ../.venv/bin/python manage.py check",
+    "backend:test": "cd backend && ../.venv/bin/python manage.py test",
+    "backend:migrate": "cd backend && ../.venv/bin/python manage.py migrate"
   }
 }

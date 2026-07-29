@@ -22,14 +22,14 @@ Use these files for the final presentation because they directly cover the SWE30
 
 ## Screenshot Key
 
-- S1 Dashboard: `presentation_screenshots/01_dashboard.png`
-- S2 Habits page: `presentation_screenshots/02_habits.png`
-- S3 Calendar page: `presentation_screenshots/03_calendar.png`
-- S4 Statistics page: `presentation_screenshots/04_statistics.png`
-- S5 Git history: `presentation_screenshots/05_git_history.png`
-- S6 Frontend and backend connection code: `presentation_screenshots/06_frontend_backend_connection.png`
-- S7 Backend structure and configuration: `presentation_screenshots/07_backend_structure.png`
-- S8 Build, lint, and testing evidence: `presentation_screenshots/08_build_quality_testing.png`
+- S1 Dashboard: `docs/screenshots/presentation/01_dashboard.png`
+- S2 Habits page: `docs/screenshots/presentation/02_habits.png`
+- S3 Calendar page: `docs/screenshots/presentation/03_calendar.png`
+- S4 Statistics page: `docs/screenshots/presentation/04_statistics.png`
+- S5 Git history: `docs/screenshots/presentation/05_git_history.png`
+- S6 Frontend and backend connection code: `docs/screenshots/presentation/06_frontend_backend_connection.png`
+- S7 Backend structure and configuration: `docs/screenshots/presentation/07_backend_structure.png`
+- S8 Build, lint, and testing evidence: `docs/screenshots/presentation/08_build_quality_testing.png`
 
 ## 1. Version Control Systems: Git and GitHub/GitLab
 
@@ -99,7 +99,7 @@ Screenshot: S8.
 
 Simple definition: Automated tests are checks that run by themselves to see if the code still works.
 
-How we used it: The Django test command currently passes 2 backend tests for structured habit goal validation. The project still needs more tests for authentication, habit CRUD, integration flows, and frontend behavior.
+How we used it: The Django test command currently passes 8 backend tests. They are grouped into unit tests, integration tests, system tests, and acceptance tests. The project still needs frontend tests and more backend edge-case tests.
 
 Screenshot: S8.
 
@@ -131,7 +131,7 @@ Screenshots: S5, S7, S8.
 
 Simple definition: This means knowing which files and settings are important to the system.
 
-How we used it: Important configuration files include `Habit_tracker/settings.py`, `Habit_tracker/package.json`, `requirements.txt`, and migration files.
+How we used it: Important configuration files include `backend/config/settings.py`, `frontend/package.json`, `backend/requirements.txt`, and migration files.
 
 Screenshots: S7, S8.
 
@@ -240,7 +240,7 @@ Screenshots: S1, S2, S6, S8.
 
 Simple definition: Test automation means tests run with a command instead of someone checking everything manually.
 
-How we used it: The project can run `npm run lint`, `npm run build`, `.venv/bin/python manage.py check`, and `.venv/bin/python manage.py test`. A sample GitHub Actions workflow is included as a future CI setup example.
+How we used it: The project can run `npm run lint`, `npm run build`, `npm run backend:check`, and `npm run backend:test`. A sample GitHub Actions workflow is included as a future CI setup example.
 
 Screenshot: S8.
 

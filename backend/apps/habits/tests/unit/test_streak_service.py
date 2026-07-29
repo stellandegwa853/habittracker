@@ -3,8 +3,8 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from habits.models import Habit, HabitCompletion
-from habits.services import calculate_streak
+from apps.habits.models import Habit, HabitCompletion
+from apps.habits.services import calculate_streak
 
 
 class StreakServiceTests(TestCase):

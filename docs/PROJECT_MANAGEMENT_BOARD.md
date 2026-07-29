@@ -22,8 +22,8 @@ This markdown board is a simple project tracking tool for VibeCheck. It can be u
 - Review all Mermaid diagrams for readability.
 - Run `npm run lint`.
 - Run `npm run build`.
-- Run `.venv/bin/python manage.py check`.
-- Run `.venv/bin/python manage.py test`.
+- Run `npm run backend:check`.
+- Run `npm run backend:test`.
 - Check that documentation does not claim features that are not implemented.
 
 ## Done

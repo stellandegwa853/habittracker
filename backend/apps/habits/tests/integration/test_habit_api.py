@@ -3,7 +3,7 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from habits.models import Habit, HabitCompletion
+from apps.habits.models import Habit, HabitCompletion
 
 
 class HabitApiIntegrationTests(APITestCase):

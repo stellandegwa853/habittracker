@@ -80,7 +80,14 @@ The system is designed for students or everyday users who want a light habit tra
 
 ```text
 habittracker/
-|-- Habit_tracker/              # React frontend and Django project settings
+|-- backend/                    # Django backend
+|   |-- apps/
+|   |   |-- habits/             # Habit models, serializers, views, URLs, tests
+|   |   `-- users/              # User auth, profile, preferences
+|   |-- config/                 # Django settings, URLs, ASGI, WSGI
+|   |-- manage.py
+|   `-- requirements.txt
+|-- frontend/                   # React and Vite frontend
 |   |-- src/
 |   |   |-- components/
 |   |   |-- context/
@@ -89,14 +96,14 @@ habittracker/
 |   |   |-- services/
 |   |   `-- utils/
 |   |-- package.json
-|   `-- settings.py
-|-- habits/                     # Django habit app
-|-- users/                      # Django user/profile app
-|-- docs/                       # Rubric documentation and diagrams
-|-- presentation_screenshots/   # Existing presentation screenshots
-|-- manage.py
+|   `-- vite.config.js
+|-- docs/                       # Rubric documentation, diagrams, screenshots
+|   |-- diagrams/
+|   |-- presentation/
+|   `-- screenshots/
+|-- postman/                    # API workspace/global files
 |-- package.json                # Root helper scripts
-`-- requirements.txt
+`-- README.md
 ```
 
 ## Setup Instructions
@@ -120,19 +127,26 @@ source .venv/bin/activate
 Install backend dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 ```
 
 Apply migrations:
 
 ```bash
-python manage.py migrate
+python backend/manage.py migrate
 ```
 
 Run the Django backend:
 
 ```bash
-python manage.py runserver 8000
+python backend/manage.py runserver 8000
+```
+
+You can also use the helper scripts:
+
+```bash
+npm run backend:migrate
+npm run backend
 ```
 
 ### 3. Frontend Setup
@@ -163,6 +177,9 @@ npm run build
 npm run lint
 npm run install:frontend
 npm run backend
+npm run backend:check
+npm run backend:test
+npm run backend:migrate
 ```
 
 ### Frontend Checks
@@ -177,14 +194,22 @@ There is currently no frontend `npm run test` script.
 ### Backend Checks
 
 ```bash
-.venv/bin/python manage.py check
-.venv/bin/python manage.py test
+npm run backend:check
+npm run backend:test
+```
+
+Or manually:
+
+```bash
+cd backend
+../.venv/bin/python manage.py check
+../.venv/bin/python manage.py test
 ```
 
 Current evidence from local checks:
 
 - Django system check passes.
-- Django test command passes 2 tests.
+- Django test command passes 8 tests.
 - Frontend lint passes.
 - Frontend build passes.
 

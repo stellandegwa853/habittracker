@@ -153,9 +153,9 @@ The UI is not perfect yet. More screenshots should be captured for the full habi
 
 ### Modularity
 
-The project is split into clear parts. React pages live in `Habit_tracker/src/pages`, reusable UI components live in `Habit_tracker/src/components`, routing lives in `Habit_tracker/src/routes`, and API calls live in `Habit_tracker/src/services/api.js`.
+The project is split into clear parts. React pages live in `frontend/src/pages`, reusable UI components live in `frontend/src/components`, routing lives in `frontend/src/routes`, and API calls live in `frontend/src/services/api.js`.
 
-The backend is also modular. The `habits` app handles habit records, habit completions, serializers, views, URLs, and streak services. The `users` app handles registration, login, profile, preferences, and password changes.
+The backend is also modular. Django configuration lives in `backend/config`. The `backend/apps/habits` app handles habit records, habit completions, serializers, views, URLs, and streak services. The `backend/apps/users` app handles registration, login, profile, preferences, and password changes.
 
 ### Reusability
 
@@ -202,12 +202,12 @@ The project has basic automated checks and local command evidence. It does not y
 | Available npm scripts | `npm run` | Passed | Shows available frontend helper scripts. |
 | Frontend lint | `npm run lint` | Passed | Checks React code style and common mistakes with ESLint. |
 | Frontend build | `npm run build` | Passed | Confirms the Vite frontend can build successfully. |
-| Django system check | `.venv/bin/python manage.py check` | Passed | Checks Django configuration and project setup. |
-| Django tests | `.venv/bin/python manage.py test` | Passed, 2 tests | Runs backend tests currently in the project. |
+| Django system check | `npm run backend:check` | Passed | Checks Django configuration and project setup. |
+| Django tests | `npm run backend:test` | Passed, 8 tests | Runs backend tests currently in the project. |
 
 Current testing coverage:
 
-- Backend tests exist for structured habit goal validation.
+- Backend tests are organized into unit, integration, system, and acceptance folders.
 - Django system checks are passing.
 - Frontend linting is passing.
 - Frontend build is passing.
@@ -215,7 +215,7 @@ Current testing coverage:
 
 Testing improvements needed:
 
-- Add more backend unit tests for registration, login, habit CRUD, completion, dashboard, and preferences.
+- Add more backend tests for profile, preferences, password changes, and edge cases.
 - Add frontend component tests.
 - Add integration tests for React and Django API flows.
 - Add acceptance testing checklist with expected results.
@@ -229,8 +229,8 @@ Branches are used for feature work and fixes. The local history also shows contr
 
 Existing evidence:
 
-- `PROJECT_TIMELINE.md`
-- `presentation_screenshots/05_git_history.png`
+- `docs/PROJECT_TIMELINE.md`
+- `docs/screenshots/presentation/05_git_history.png`
 - Git branches and commit history
 - Local lint/build/test commands
 
@@ -277,7 +277,7 @@ Recommended communication tools to mention if they were used:
 
 ## 12. Project Management
 
-The project currently has `PROJECT_TIMELINE.md`, which records major milestones and can be used as project management evidence. A simple markdown board has also been added in [PROJECT_MANAGEMENT_BOARD.md](PROJECT_MANAGEMENT_BOARD.md).
+The project currently has `docs/PROJECT_TIMELINE.md`, which records major milestones and can be used as project management evidence. A simple markdown board has also been added in [PROJECT_MANAGEMENT_BOARD.md](PROJECT_MANAGEMENT_BOARD.md).
 
 No Trello, GitHub Projects, or Kanban screenshot was found in the repository. If the group used one outside the repo, a screenshot should be added. If not, the group can explain that the project timeline and markdown board were used as lightweight tracking tools.
 

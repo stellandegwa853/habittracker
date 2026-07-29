@@ -41,8 +41,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # API endpoints
-    path('api/users/', include('users.urls')),
-    path('api/habits/', include('habits.urls')),
+    path('api/users/', include('apps.users.urls')),
+    path('api/habits/', include('apps.habits.urls')),
     
     # Swagger/OpenAPI documentation
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

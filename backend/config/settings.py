@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     'corsheaders',
     
     # Local apps
-    'users',
-    'habits',
+    'apps.users',
+    'apps.habits',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Habit_tracker.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -81,7 +81,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Habit_tracker.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database

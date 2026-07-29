@@ -2,7 +2,10 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+node_modules/
+dist/
 db.sqlite3
+*.sqlite3
 .env
 .vscode/
 .idea/
@@ -12,3 +15,4 @@ media/
 coverage/
 htmlcov/
 .DS_Store
+Habit_tracker/
