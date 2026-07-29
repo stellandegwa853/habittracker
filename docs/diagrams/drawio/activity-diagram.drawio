@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <mxfile host="app.diagrams.net" modified="2026-07-29T15:09:57.785723+00:00" agent="Codex" version="24.7.17" type="device">
   <diagram id="page-105" name="Activity Diagram">
-    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1150" math="0" shadow="0">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1300" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
@@ -57,6 +57,12 @@
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
         <mxCell id="e-67" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontColor=#6f6760;" edge="1" parent="1" source="v-58" target="v-59">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="v-67a" value="View calendar and statistics" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#f7e7bb;strokeColor=#d9cabe;strokeWidth=2;fontColor=#1f1c19;fontSize=20;fontStyle=1;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="570" y="1140" width="460" height="75" as="geometry"/>
+        </mxCell>
+        <mxCell id="e-67a" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#8a5637;strokeWidth=2;endArrow=block;endFill=1;fontColor=#6f6760;" edge="1" parent="1" source="v-59" target="v-67a">
           <mxGeometry relative="1" as="geometry"/>
         </mxCell>
       </root>
